@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PCB Manufacturing Calculator Dashboard — Stencil Aperture, Through-Hole Pad & Drill, and Engineering Unit Converter for PCB engineers." />
+  <title>PCB Manufacturing Calculator Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     APP LAYOUT
+     ============================================================ -->
+<div class="app-layout">
+
+  <!-- ======================== SIDEBAR ======================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">PCB</div>
+      <div class="sidebar-title"><span>PCB</span> CalcPro</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a class="nav-item active" data-page="dashboard" href="#">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+
+      <div class="nav-section-label">Calculators</div>
+      <a class="nav-item" data-page="stencil" href="#">
+        <span class="nav-icon">🔲</span> Stencil Aperture
+      </a>
+      <a class="nav-item" data-page="throughhole" href="#">
+        <span class="nav-icon">🕳️</span> Through-Hole Pad
+      </a>
+      <a class="nav-item" data-page="converter" href="#">
+        <span class="nav-icon">🔄</span> Unit Converter
+      </a>
+
+      <div class="nav-section-label">Data</div>
+      <a class="nav-item" data-page="history" href="#">
+        <span class="nav-icon">📋</span> History
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div style="font-size:0.7rem;color:var(--text-muted);text-align:center;">
+        v1.0 &bull; PCB CalcPro<br/>
+        <span style="font-size:0.65rem;">No backend required</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ======================== MAIN ======================== -->
+  <main class="main-content">
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+        <span class="pulse-dot" title="Live updates active"></span>
+      </div>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="toggle-icon" id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT AREA -->
+    <section class="content-area">
+
+      <!-- ======== PAGE: Dashboard ======== -->
+      <div class="module-page active" id="page-dashboard">
+        <!-- Stats row -->
+        <div class="grid-4 mb-24">
+          <div class="dash-stat">
+            <div class="dash-stat-icon cyan">🔲</div>
+            <div class="dash-stat-info">
+              <div class="dash-stat-value" id="dashStencilCount">0</div>
+              <div class="dash-stat-label">Stencil Calculations</div>
+            </div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-icon indigo">🕳️</div>
+            <div class="dash-stat-info">
+              <div class="dash-stat-value" id="dashTHCount">0</div>
+              <div class="dash-stat-label">Through-Hole Calcs</div>
+            </div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-icon green">🔄</div>
+            <div class="dash-stat-info">
+              <div class="dash-stat-value" id="dashConvCount">0</div>
+              <div class="dash-stat-label">Conversions</div>
+            </div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-icon amber">📋</div>
+            <div class="dash-stat-info">
+              <div class="dash-stat-value" id="dashTotalCount">0</div>
+              <div class="dash-stat-label">Total Records</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick actions -->
+        <h2 class="section-heading">⚡ Quick Actions</h2>
+        <div class="grid-3 mb-24">
+          <div class="quick-action" data-goto="stencil">
+            <div class="qa-icon">🔲</div>
+            <h4>Stencil Aperture</h4>
+            <p>Calculate area ratios and validate stencil designs for SMT pads.</p>
+          </div>
+          <div class="quick-action" data-goto="throughhole">
+            <div class="qa-icon">🕳️</div>
+            <h4>Through-Hole Pad</h4>
+            <p>Compute drill sizes, pad diameters, and annular rings.</p>
+          </div>
+          <div class="quick-action" data-goto="converter">
+            <div class="qa-icon">🔄</div>
+            <h4>Unit Converter</h4>
+            <p>Convert between mm, mil, and inch instantly.</p>
+          </div>
+        </div>
+
+        <!-- Recent history -->
+        <div class="card">
+          <div class="card-header">
+            <h3><span class="card-icon">🕐</span> Recent Activity</h3>
+          </div>
+          <div class="card-body">
+            <div id="dashRecentHistory">
+              <div class="empty-state">
+                <div class="empty-icon">📭</div>
+                <p>No calculations yet. Start by using one of the calculators above!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== PAGE: Stencil Aperture ======== -->
+      <div class="module-page" id="page-stencil">
+        <div class="grid-2 mb-24">
+          <!-- Left: Inputs -->
+          <div class="card">
+            <div class="card-header">
+              <h3><span class="card-icon">⚙️</span> Stencil Parameters</h3>
+            </div>
+            <div class="card-body">
+              <!-- Shape selector -->
+              <div class="form-group">
+                <label>Aperture Shape</label>
+                <div class="shape-selector" id="shapeSelector">
+                  <button class="shape-btn active" data-shape="rectangle">
+                    <span class="shape-icon">▬</span> Rectangle
+                  </button>
+                  <button class="shape-btn" data-shape="circle">
+                    <span class="shape-icon">⬤</span> Circle
+                  </button>
+                  <button class="shape-btn" data-shape="rounded-rect">
+                    <span class="shape-icon">▢</span> Rounded Rect
+                  </button>
+                  <button class="shape-btn" data-shape="polygon">
+                    <span class="shape-icon">⬠</span> Polygon
+                  </button>
+                </div>
+              </div>
+
+              <!-- Standard Dimensions -->
+              <div class="standard-dimensions" id="stdDimensions">
+                <!-- Rectangle / Rounded Rect dims -->
+                <div id="rectDims">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>Length (mm)</label>
+                      <input type="number" class="form-control" id="rectLength" placeholder="e.g. 1.2" step="0.01" min="0" />
+                    </div>
+                    <div class="form-group">
+                      <label>Width (mm)</label>
+                      <input type="number" class="form-control" id="rectWidth" placeholder="e.g. 0.6" step="0.01" min="0" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Circle dims -->
+                <div id="circleDims" style="display:none;">
+                  <div class="form-group">
+                    <label>Diameter (mm)</label>
+                    <input type="number" class="form-control" id="circleDiameter" placeholder="e.g. 0.8" step="0.01" min="0" />
+                  </div>
+                </div>
+
+                <!-- Corner Radius for rounded rect -->
+                <div id="cornerDims" style="display:none;">
+                  <div class="form-group">
+                    <label>Corner Radius (mm)</label>
+                    <input type="number" class="form-control" id="cornerRadius" placeholder="e.g. 0.15" step="0.01" min="0" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Polygon Dimensions -->
+              <div class="polygon-dimensions" id="polyDimensions">
+                <div class="form-group">
+                  <label>Vertex Coordinates (mm)</label>
+                  <div class="table-wrapper" style="max-height:220px;overflow-y:auto;">
+                    <table class="coord-table" id="coordTable">
+                      <thead>
+                        <tr><th>#</th><th>X (mm)</th><th>Y (mm)</th><th></th></tr>
+                      </thead>
+                      <tbody id="coordBody"></tbody>
+                    </table>
+                  </div>
+                  <button class="btn btn-secondary btn-sm mt-16" id="addPointBtn">+ Add Point</button>
+                </div>
+              </div>
+
+              <!-- Stencil Thickness -->
+              <div class="form-group">
+                <label>Stencil Thickness (mm)</label>
+                <input type="number" class="form-control" id="stencilThickness" placeholder="e.g. 0.12" step="0.01" min="0" />
+              </div>
+
+              <div class="btn-group mt-16">
+                <button class="btn btn-primary" id="calcStencilBtn">Calculate</button>
+                <button class="btn btn-secondary" id="resetStencilBtn">Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Preview -->
+          <div class="card">
+            <div class="card-header">
+              <h3><span class="card-icon">👁️</span> Aperture Preview</h3>
+            </div>
+            <div class="card-body">
+              <div class="canvas-container">
+                <span class="canvas-label">Shape Preview</span>
+                <canvas id="apertureCanvas" width="360" height="260"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="card mb-24">
+          <div class="card-header">
+            <h3><span class="card-icon">📐</span> Calculation Results</h3>
+            <button class="btn btn-secondary btn-sm" id="copyStencilResults">📋 Copy</button>
+          </div>
+          <div class="card-body">
+            <div class="grid-4 mb-24" id="stencilResultCards">
+              <div class="stat-card">
+                <div class="stat-label">Area Opening</div>
+                <div class="stat-value" id="resAreaOpening">—</div>
+                <div class="stat-unit">mm²</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Perimeter</div>
+                <div class="stat-value" id="resPerimeter">—</div>
+                <div class="stat-unit">mm</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Area Wall</div>
+                <div class="stat-value" id="resAreaWall">—</div>
+                <div class="stat-unit">mm²</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Area Ratio</div>
+                <div class="stat-value" id="resAreaRatio">—</div>
+                <div class="stat-unit" id="resPassFail"></div>
+              </div>
+            </div>
+            <!-- Detailed steps -->
+            <div class="section-heading">📝 Detailed Calculation Steps</div>
+            <div class="calc-steps" id="stencilCalcSteps">
+              <span style="color:var(--text-muted);">Enter parameters and click Calculate to see detailed steps…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== PAGE: Through-Hole ======== -->
+      <div class="module-page" id="page-throughhole">
+        <div class="card mb-24">
+          <div class="card-header">
+            <h3><span class="card-icon">🕳️</span> Through-Hole Components</h3>
+            <div class="btn-group">
+              <button class="btn btn-primary btn-sm" id="addComponentBtn">+ Add Component</button>
+              <button class="btn btn-secondary btn-sm" id="calcTHBtn">Calculate All</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Unit selector & plating allowance -->
+            <div class="form-row mb-24" style="max-width:500px;">
+              <div class="form-group">
+                <label>Unit</label>
+                <select class="form-control" id="thUnit">
+                  <option value="mm">mm (millimeters)</option>
+                  <option value="mil">mil (thousandths of inch)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Plating Allowance (mil) <span style="font-size:0.65rem;color:var(--text-muted);text-transform:none;letter-spacing:0;">(optional, default 0)</span></label>
+                <input type="number" class="form-control" id="thPlating" placeholder="e.g. 1.0" step="0.1" min="0" value="" />
+              </div>
+            </div>
+
+            <!-- Component entries -->
+            <div class="component-entries" id="componentEntries">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Results table -->
+        <div class="card mb-24">
+          <div class="card-header">
+            <h3><span class="card-icon">📊</span> Calculation Results</h3>
+            <button class="btn btn-secondary btn-sm" id="copyTHResults">📋 Copy</button>
+          </div>
+          <div class="card-body">
+            <div class="table-wrapper">
+              <table class="data-table" id="thResultTable">
+                <thead>
+                  <tr>
+                    <th>Ref</th>
+                    <th>Pin Dia</th>
+                    <th>Finished Hole</th>
+                    <th>Drill Size</th>
+                    <th>Hole-to-Pin Clearance</th>
+                    <th>Unit</th>
+                  </tr>
+                </thead>
+                <tbody id="thResultBody">
+                  <tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:40px;">Add components and click Calculate to see results.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="calc-steps mt-24" id="thCalcSteps">
+              <span style="color:var(--text-muted);">Calculation steps will appear here…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== PAGE: Unit Converter ======== -->
+      <div class="module-page" id="page-converter">
+        <div class="grid-3">
+          <!-- mm ↔ mil -->
+          <div class="card converter-card">
+            <div class="card-header">
+              <h3><span class="card-icon">↔️</span> mm ↔ mil</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>Millimeters (mm)</label>
+                <input type="number" class="form-control" id="conv_mm_mil_mm" placeholder="Enter mm" step="any" />
+              </div>
+              <div class="swap-icon">⇅</div>
+              <div class="form-group">
+                <label>Mils (mil)</label>
+                <input type="number" class="form-control" id="conv_mm_mil_mil" placeholder="Enter mil" step="any" />
+              </div>
+              <div class="converter-result" id="conv_mm_mil_result">—</div>
+              <div class="converter-unit" id="conv_mm_mil_unit"></div>
+            </div>
+          </div>
+
+          <!-- mm ↔ inch -->
+          <div class="card converter-card">
+            <div class="card-header">
+              <h3><span class="card-icon">↔️</span> mm ↔ inch</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>Millimeters (mm)</label>
+                <input type="number" class="form-control" id="conv_mm_inch_mm" placeholder="Enter mm" step="any" />
+              </div>
+              <div class="swap-icon">⇅</div>
+              <div class="form-group">
+                <label>Inches (in)</label>
+                <input type="number" class="form-control" id="conv_mm_inch_inch" placeholder="Enter inch" step="any" />
+              </div>
+              <div class="converter-result" id="conv_mm_inch_result">—</div>
+              <div class="converter-unit" id="conv_mm_inch_unit"></div>
+            </div>
+          </div>
+
+          <!-- mil ↔ inch -->
+          <div class="card converter-card">
+            <div class="card-header">
+              <h3><span class="card-icon">↔️</span> mil ↔ inch</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label>Mils (mil)</label>
+                <input type="number" class="form-control" id="conv_mil_inch_mil" placeholder="Enter mil" step="any" />
+              </div>
+              <div class="swap-icon">⇅</div>
+              <div class="form-group">
+                <label>Inches (in)</label>
+                <input type="number" class="form-control" id="conv_mil_inch_inch" placeholder="Enter inch" step="any" />
+              </div>
+              <div class="converter-result" id="conv_mil_inch_result">—</div>
+              <div class="converter-unit" id="conv_mil_inch_unit"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======== PAGE: History ======== -->
+      <div class="module-page" id="page-history">
+        <div class="card">
+          <div class="card-header">
+            <h3><span class="card-icon">📋</span> Calculation History</h3>
+          </div>
+          <div class="card-body">
+            <div class="history-toolbar">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="historySearch" placeholder="Search history…" />
+              </div>
+              <button class="btn btn-secondary btn-sm" id="exportCSVBtn">📄 Export CSV</button>
+              <button class="btn btn-secondary btn-sm" id="exportPDFBtn">📑 Export PDF</button>
+              <button class="btn btn-danger btn-sm" id="clearHistoryBtn">🗑️ Clear All</button>
+            </div>
+            <div id="historyList">
+              <div class="empty-state">
+                <div class="empty-icon">📭</div>
+                <p>No history records yet.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
