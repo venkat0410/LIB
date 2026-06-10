@@ -801,32 +801,43 @@ function calculateThroughHole() {
     // Drill Size = Finished Hole + 2 × Plating Allowance
     // (plating is deposited on both walls, so total reduction = 2 × allowance)
     const drillMil = finishedHoleMil + 2 * platingMil;
+    const roundedDrillMil = Math.ceil(drillMil);
+    const recommendedFinishedDrillMil = roundedDrillMil % 2 === 0 ? roundedDrillMil : roundedDrillMil + 1;
+    const recommendedPadMil = recommendedFinishedDrillMil + 20;
 
     // Hole-to-Pin Clearance = Finished Hole − Pin Diameter
     const clearanceMil = finishedHoleMil - pinMil; // always 8 mil by definition
 
-    // Build result object in display units
-    const toDisplay = (valMil) => (unit === "mm" ? (valMil * MIL_TO_MM).toFixed(4) : valMil.toFixed(2));
+    // Build result object with both display units.
+    const toMilDisplay = (valMil) => valMil.toFixed(2);
+    const toMmDisplay = (valMil) => (valMil * MIL_TO_MM).toFixed(4);
+    const toDualDisplay = (valMil) => `${toMmDisplay(valMil)} mm / ${toMilDisplay(valMil)} mil`;
 
     const row = {
       ref,
-      pin: toDisplay(pinMil),
-      finishedHole: toDisplay(finishedHoleMil),
-      drill: toDisplay(drillMil),
-      clearance: toDisplay(clearanceMil),
-      unit,
+      pin: toDualDisplay(pinMil),
+      finishedHole: toDualDisplay(finishedHoleMil),
+      drill: toDualDisplay(drillMil),
+      recommendedFinishedDrill: toDualDisplay(recommendedFinishedDrillMil),
+      recommendedPad: toDualDisplay(recommendedPadMil),
+      clearance: toDualDisplay(clearanceMil),
+      unit: "mm / mil",
     };
     results.push(row);
 
     stepsLines.push(
       `<span class="step-label">─── ${ref} ───</span>`,
-      `<span class="step-label">Pin Diameter:</span> ${pinRaw} ${unit} (${pinMil.toFixed(2)} mil)`,
+      `<span class="step-label">Lead Diameter:</span> ${toDualDisplay(pinMil)}`,
       `<span class="step-formula">Finished Hole = Pin Dia + 8 mil (company std)</span>`,
-      `<span class="step-result">Finished Hole = ${pinMil.toFixed(2)} + 8 = ${finishedHoleMil.toFixed(2)} mil → ${toDisplay(finishedHoleMil)} ${unit}</span>`,
+      `<span class="step-result">Finished Hole = ${pinMil.toFixed(2)} + 8 = ${finishedHoleMil.toFixed(2)} mil → ${toDualDisplay(finishedHoleMil)}</span>`,
       `<span class="step-formula">Drill Size = Finished Hole + 2 × Plating Allowance</span>`,
-      `<span class="step-result">Drill = ${finishedHoleMil.toFixed(2)} + 2 × ${platingMil.toFixed(2)} = ${drillMil.toFixed(2)} mil → ${toDisplay(drillMil)} ${unit}</span>`,
+      `<span class="step-result">Drill = ${finishedHoleMil.toFixed(2)} + 2 × ${platingMil.toFixed(2)} = ${drillMil.toFixed(2)} mil → ${toDualDisplay(drillMil)}</span>`,
+      `<span class="step-formula">Recommended Finished Drill Size = Calculated Drill Size rounded up to the next even mil size</span>`,
+      `<span class="step-result">Recommended Finished Drill = ${drillMil.toFixed(2)} mil → ${recommendedFinishedDrillMil.toFixed(2)} mil → ${toDualDisplay(recommendedFinishedDrillMil)}</span>`,
+      `<span class="step-formula">Recommended Pad Size = Recommended Finished Drill Size + 20 mil</span>`,
+      `<span class="step-result">Recommended Pad = ${recommendedFinishedDrillMil.toFixed(2)} + 20 = ${recommendedPadMil.toFixed(2)} mil → ${toDualDisplay(recommendedPadMil)}</span>`,
       `<span class="step-formula">Hole-to-Pin Clearance = Finished Hole − Pin Dia</span>`,
-      `<span class="step-result">Clearance = ${finishedHoleMil.toFixed(2)} − ${pinMil.toFixed(2)} = ${clearanceMil.toFixed(2)} mil → ${toDisplay(clearanceMil)} ${unit}</span>`,
+      `<span class="step-result">Clearance = ${finishedHoleMil.toFixed(2)} − ${pinMil.toFixed(2)} = ${clearanceMil.toFixed(2)} mil → ${toDualDisplay(clearanceMil)}</span>`,
       ""
     );
   });
@@ -843,10 +854,11 @@ function calculateThroughHole() {
       (r) => `
     <tr>
       <td>${r.ref}</td>
-      <td>${r.pin} ${r.unit}</td>
-      <td>${r.finishedHole} ${r.unit}</td>
-      <td>${r.drill} ${r.unit}</td>
-      <td>${r.clearance} ${r.unit}</td>
+      <td>${r.pin}</td>
+      <td>${r.drill}</td>
+      <td>${r.recommendedFinishedDrill}</td>
+      <td>${r.recommendedPad}</td>
+      <td>${r.clearance}</td>
       <td>${r.unit}</td>
     </tr>`
     )
@@ -867,7 +879,7 @@ function calculateThroughHole() {
 // Copy through-hole results
 document.getElementById("copyTHResults").addEventListener("click", () => {
   const rows = document.querySelectorAll("#thResultBody tr");
-  let text = "Ref\tPin Dia\tFinished Hole\tDrill Size\tHole-to-Pin Clearance\tUnit\n";
+  let text = "Ref\tLead Diameter\tCalculated Drill Size\tRecommended Finished Drill Size\tRecommended Pad Size\tHole-to-Pin Clearance\tUnit\n";
   rows.forEach((tr) => {
     const cells = Array.from(tr.cells).map((c) => c.textContent.trim());
     text += cells.join("\t") + "\n";
@@ -1032,7 +1044,7 @@ function renderHistoryList(filter = "") {
         dataHtml = `Shape: ${d.shape} | Area: ${d.areaOpening} mm² | Ratio: ${d.areaRatio} | ${d.status}`;
       } else if (h.type === "Through-Hole") {
         if (Array.isArray(h.data)) {
-          dataHtml = h.data.map((r) => `${r.ref}: Hole=${r.finishedHole} Drill=${r.drill} ${r.unit}`).join(" | ");
+          dataHtml = h.data.map((r) => `${r.ref}: Hole=${r.finishedHole} Drill=${r.drill}`).join(" | ");
         } else {
           dataHtml = JSON.stringify(h.data);
         }
@@ -1125,7 +1137,7 @@ document.getElementById("exportPDFBtn").addEventListener("click", () => {
       lines.push(`  Status: ${d.status}`);
     } else if (h.type === "Through-Hole" && Array.isArray(h.data)) {
       h.data.forEach((r) => {
-        lines.push(`  ${r.ref}: Pin=${r.pin} Hole=${r.finishedHole} Drill=${r.drill} Clearance=${r.clearance} ${r.unit}`);
+        lines.push(`  ${r.ref}: Pin=${r.pin} Hole=${r.finishedHole} Drill=${r.drill} Clearance=${r.clearance}`);
       });
     } else if (h.type === "Unit Conversion") {
       const d = h.data;
