@@ -1,0 +1,2513 @@
+!.LCID 1033
+.Filetype ASCII_PDB
+.Version "02.02"
+.LIBRARY_DB_TYPE "Enterprise"
+.Units th
+.Notation Si
+
+.Number "DP-FTRF-0002-600"
+	..Name "DP-FTRF-0002-600"
+		...Default
+	..Label "DP-FTRF-0002-600"
+		...Default
+	..Desc "Foil transformer for Forward converter TRF EQ20 2Np : 3Ns 85W 9V-40Vindc to 5Vodc (DP-PSU-4000-600)"
+	..RefPrefix "U"
+	..TopCell "DP-FTRF-0002-600"
+	..BottomCell ""
+	..Modified	1774621787 ! 27-Mar-26 07:59 PM
+	..Prop "Type",	"IC",	"Text"
+	..Prop "Approved",	"NOT APPROVED",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapID	"P3"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"Output",	"Text"
+		...SwapIDProperties	"P3"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"MISC:DP-PTRF-0002-600"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"PRI-IN"
+			....PinName	"PRI-RTN"
+			....PinName	"SEC-GND"
+			....PinName	"SEC-OUT"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+			....PinNumber	"4"
+			....PinNumber	"3"
+
+.Number "DP-RM-CAP-01210"
+	..Name "12062A681JAT2A"
+		...Default
+	..Label "C1206"
+		...Default
+	..Desc "CAP CER 680pF 200V 5% 1206 C0G (NP0) +/-30ppm "
+	..RefPrefix "C"
+	..TopCell "C1206"
+	..BottomCell ""
+	..Modified	1563867088 ! 23-Jul-19 01:01 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"680p",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-03140"
+	..Name "C0402C222K5RACTU"
+		...Default
+	..Label "C0402"
+		...Default
+	..Desc "CAP CER 2200pF 50V 10% 0402 X7R +/-15ppm  "
+	..RefPrefix "C"
+	..TopCell "C0402"
+	..BottomCell ""
+	..Modified	1563871304 ! 23-Jul-19 02:11 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.0022u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-03151"
+	..Name "C0402C273K8RACTU"
+		...Default
+	..Label "C0402"
+	..Desc "CAP CER 27000pF 10V 10% 0402 X7R +/-15ppm "
+	..RefPrefix "C"
+	..TopCell "C0402"
+	..BottomCell ""
+	..Modified	1563871343 ! 23-Jul-19 02:12 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.027u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-03240"
+	..Name "C0603C102J5RACTU"
+		...Default
+	..Label "C0603"
+		...Default
+	..Desc "CAP CER 1000pF 50V 5% 0603 X7R +/-15ppm "
+	..RefPrefix "C"
+	..TopCell "C0603"
+	..BottomCell ""
+	..Modified	1563871426 ! 23-Jul-19 02:13 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.001u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-03270"
+	..Name "C0603C103K5RACTU"
+		...Default
+	..Label "C0603-0P9"
+		...Default
+	..Desc "CAP CER 0.01uF 50V 10% X7R 15ppm 0603 RoHs"
+	..RefPrefix "C"
+	..TopCell "C0603-0P9"
+	..BottomCell ""
+	..Modified	1505728173 ! 18-Sep-17 03:19 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.01u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-03300"
+	..Name "CGJ3E2X7R1E104K080AA"
+		...Default
+	..Label "C0603-0P9"
+	..Desc "CAP CER 0.1uF 25V 10% 0603 X7R +/-15ppm"
+	..RefPrefix "C"
+	..TopCell "C0603-0P9"
+	..BottomCell ""
+	..Modified	1558681823 ! 24-May-19 12:40 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.1u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-04480"
+	..Name "C1608C0G1E103J080AA"
+		...Default
+	..Label "C0603"
+	..Desc "CAP CER 0.01uF 25V 5% 0603 C0G (NP0) +/-30ppm"
+	..RefPrefix "C"
+	..TopCell "C0603"
+	..BottomCell ""
+	..Modified	1471516710 ! 18-Aug-16 04:08 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.01u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-05380"
+	..Name "CC0805JRNPO9BN101"
+		...Default
+	..Label "C0805"
+		...Default
+	..Desc "CAP CER 100pF 50V 5% 0805 C0G(NP0) +/-30ppm"
+	..RefPrefix "C"
+	..TopCell "C0805"
+	..BottomCell ""
+	..Modified	1498713205 ! 29-Jun-17 10:43 AM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"100p",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-09790"
+	..Name "C1608X7R1E103K080AA"
+		...Default
+	..Label "C0603"
+	..Desc "CAP CER 0.01uF 25V 10% X7R 15ppm 0603 RoHs"
+	..RefPrefix "C"
+	..TopCell "C0603"
+	..BottomCell ""
+	..Modified	1474261990 ! 19-Sep-16 10:43 AM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.01u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-09970"
+	..Name "C2012X7R1E475K125AB"
+		...Default
+	..Label "C0805-1P45"
+		...Default
+	..Desc "CAP CER 4.7uF 25V 10% X7R 15ppm 0805 RoHs"
+	..RefPrefix "C"
+	..TopCell "C0805-1P45"
+	..BottomCell ""
+	..Modified	1619507868 ! 27-Apr-21 12:47 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"4.7u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-09990"
+	..Name "C0805C475K4RACTU"
+		...Default
+	..Label "C0805-1P4"
+		...Default
+	..Desc "CAP CER 4.7uF 16V 10% X7R 15ppm 0805 RoHs"
+	..RefPrefix "C"
+	..TopCell "C0805-1P4"
+	..BottomCell ""
+	..Modified	1563870827 ! 23-Jul-19 02:03 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"4.7u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-14141"
+	..Name "C1005C0G1H271J050BA"
+		...Default
+	..Label "C0402"
+	..Desc "CAP CER 270pF 50V 5% COG(NPO) 30ppm 0402 RoHs"
+	..RefPrefix "C"
+	..TopCell "C0402"
+	..BottomCell ""
+	..Modified	1474262865 ! 19-Sep-16 10:57 AM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"270p",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-14142"
+	..Name "CGA2B2C0G1H561J050BA"
+		...Default
+	..Label "C0402"
+	..Desc "CAP CER 560pF 50V 5% 0402 C0G +/-30ppm"
+	..RefPrefix "C"
+	..TopCell "C0402"
+	..BottomCell ""
+	..Modified	1558682376 ! 24-May-19 12:49 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"560p",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-14540"
+	..Name "08055C105K4Z2A"
+		...Default
+	..Label "C0805-1P4"
+	..Desc "CAP CER 1uF 50V 10% X7R 15ppm 0805 RoHs"
+	..RefPrefix "C"
+	..TopCell "C0805-1P4"
+	..BottomCell ""
+	..Modified	1558682412 ! 24-May-19 12:50 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"1u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17050"
+	..Name "202R29W151KV4E"
+		...Default
+	..Label "C1808-2P16"
+		...Default
+	..Desc "CAP Ceramic 150PF 2KV 10% 1808 X7R"
+	..RefPrefix "C"
+	..TopCell "C1808-2P16"
+	..BottomCell ""
+	..Modified	1563887227 ! 23-Jul-19 06:37 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"150p",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17083"
+	..Name "EMK316BB7226ML-T"
+		...Default
+	..Label "C1206-1P8"
+		...Default
+	..Desc "CAP CER 22uF 16V 20% 1206 X7R"
+	..RefPrefix "C"
+	..TopCell "C1206-1P8"
+	..BottomCell ""
+	..Modified	1640243549 ! 23-Dec-21 12:42 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"22u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17176"
+	..Name "C0805C473K5RACAUTO"
+		...Default
+	..Label "C0805-0P88"
+		...Default
+	..Desc "CAP CER 47000pF 50V 10% 0805 X7R +/-15ppm AUTOM"
+	..RefPrefix "C"
+	..TopCell "C0805-0P88"
+	..BottomCell ""
+	..Modified	1535544664 ! 29-Aug-18 05:41 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.047u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17178"
+	..Name "CC0603KRX7R8BB104"
+		...Default
+	..Label "C0603-0P9"
+	..Desc "CAP CER 0.1uF 25V 5% 0603 X7R +/-15ppm AUTOM"
+	..RefPrefix "C"
+	..TopCell "C0603-0P9"
+	..BottomCell ""
+	..Modified	1779282754 ! 20-May-26 06:42 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.1u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17234"
+	..Name "UMK107AB7105KA-T"
+		...Default
+	..Label "C0603-0P95"
+		...Default
+	..Desc "CAP CER 1uF 50V 10% X7R 0603"
+	..RefPrefix "C"
+	..TopCell "C0603-0P95"
+	..BottomCell ""
+	..Modified	1521718637 ! 22-Mar-18 05:07 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"1u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17340"
+	..Name "CGA4J1X7S1E106K125AC"
+		...Default
+	..Label "C0805-1P25"
+		...Default
+	..Desc "CAP CER 10UF 25Vdc 10% X7S 0805 SMD AUTOM"
+	..RefPrefix "C"
+	..TopCell "C0805-1P25"
+	..BottomCell ""
+	..Modified	1585737420 ! 01-Apr-20 04:07 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"10u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17488"
+	..Name "CL10B105KA8VPNC"
+		...Default
+	..Label "C0603-0P9"
+	..Desc "CAP CER 1uF 25V 10% X7R 15ppm 0603 RoHs"
+	..RefPrefix "C"
+	..TopCell "C0603-0P9"
+	..BottomCell ""
+	..Modified	1663390644 ! 17-Sep-22 10:27 AM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"1u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17578"
+	..Name "CGA4J1X7R1H475K125AC"
+		...Default
+	..Label "C0805-1P45"
+	..Desc "CAP CER 4.7uF 10% 50V X7R 0805 SMD RoHS"
+	..RefPrefix "C"
+	..TopCell "C0805-1P45"
+	..BottomCell ""
+	..Modified	1652415537 ! 13-May-22 09:48 AM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"4.7u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17711"
+	..Name "C3225X7R2A106K250AC"
+		...Default
+	..Label "C1210-2P85"
+		...Default
+	..Desc "CAP CER 10uF 100V 10% 1210 X7R +/-15ppm RoHs"
+	..RefPrefix "C"
+	..TopCell "C1210-2P85"
+	..BottomCell ""
+	..Modified	1754389126 ! 05-Aug-25 03:48 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"10u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17713"
+	..Name "C3216X7R2A475K160AC"
+		...Default
+	..Label "C1206-1P6"
+		...Default
+	..Desc "CAP CER 4.7uF 100V 10% 1206 X7R +/-15ppm"
+	..RefPrefix "C"
+	..TopCell "C1206-1P6"
+	..BottomCell ""
+	..Modified	1699939532 ! 14-Nov-23 10:55 AM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"4.7u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17798"
+	..Name "C1812C104JDRACTU"
+		...Default
+	..Label "C1812-1P85"
+		...Default
+	..Desc "CAP CER 0.1uF 1000V 5% 1812 X7R +/-15ppm"
+	..RefPrefix "C"
+	..TopCell "C1812-1P85"
+	..BottomCell ""
+	..Modified	1732873293 ! 29-Nov-24 03:11 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.1u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17824"
+	..Name "C1210C473KDRACTU"
+		...Default
+	..Label "C1210-2P3"
+		...Default
+	..Desc "CAP CER 0.047uF 1kVDC 10% 1210 C0G"
+	..RefPrefix "C"
+	..TopCell "C1210-2P3"
+	..BottomCell ""
+	..Modified	1742378002 ! 19-Mar-25 03:23 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.047u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-17847"
+	..Name "C2012X7R2A225K125AC"
+		...Default
+	..Label "C0805-1P5"
+		...Default
+	..Desc "CAP CER 2.2uF 100V 10% 1206 X7R +/-15ppm"
+	..RefPrefix "C"
+	..TopCell "C0805-1P5"
+	..BottomCell ""
+	..Modified	1748609614 ! 30-May-25 06:23 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"2.2u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CAP-70035"
+	..Name "C0603C104K4RACAUTO"
+		...Default
+	..Label "C0603"
+	..Desc "CAP CER 0.1uF 16V 10% 0603 X7R +/-15ppm AUTOM"
+	..RefPrefix "C"
+	..TopCell "C0603"
+	..BottomCell ""
+	..Modified	1777035489 ! 24-Apr-26 06:28 PM
+	..Prop "Type",	"Capacitor",	"Text"
+	..Prop "Value",	"0.1u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"CAP:CAP-NP"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-CON-27236"
+	..Name "013.14.125"
+		...Default
+	..Label "013-14-125-PTH"
+		...Default
+	..Desc "CON TURRET PTH Solder Mount 12mm Length, 1.5mm Flange Dia, 1mm Conductor Dia, Tin over Brass"
+	..RefPrefix "T"
+	..TopCell "013-14-125-PTH"
+	..BottomCell ""
+	..Modified	1680256342 ! 31-Mar-23 03:22 PM
+	..Prop "Type",	"Connector",	"Text"
+	..Prop "Approved",	"NOT APPROVED",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+	..Symbol	"CONR:TURRET"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"TEST"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+
+.Number "DP-RM-CON-27261"
+	..Name "5191-0-00-15-00-00-03-0"
+		...Default
+	..Label "TURRET-5191"
+		...Default
+	..Desc "CON Turret Solder ST 15.09mm-OAL, 9.53mm-Post, 3.96mm-Tail, 1.52mm-Dia 1.63mm-PTH Gold over Ni-Brass"
+	..RefPrefix "T"
+	..TopCell "TURRET-5191"
+	..BottomCell ""
+	..Modified	1681375772 ! 13-Apr-23 02:19 PM
+	..Prop "Type",	"Connector",	"Text"
+	..Prop "Approved",	"NOT APPROVED",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+	..Symbol	"CONR:TURRET"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"TEST"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+
+.Number "DP-RM-DIO-00130"
+	..Name "1N4448WS-7-F"
+		...Default
+	..Label "SOD-323"
+		...Default
+	..Desc "DIODE SWITCH 75V 200MW SOD-323"
+	..RefPrefix "D"
+	..TopCell "SOD-323"
+	..BottomCell ""
+	..Modified	1410938337 ! 17-Sep-14 12:48 PM
+	..Prop "Type",	"Diode",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"DIO:DIODE"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"ANODE"
+			....PinName	"CATHODE"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"A"
+			....PinNumber	"K"
+
+.Number "DP-RM-DIO-02934"
+	..Name "VSSA210-E3/61T"
+		...Default
+	..Label "SMA"
+		...Default
+	..Desc "DIODE SCHOTTKY VR - 100V, VF - 0.61V, 2A SMA, DO-214AC"
+	..RefPrefix "D"
+	..TopCell "SMA"
+	..BottomCell ""
+	..Modified	1614400118 ! 27-Feb-21 09:58 AM
+	..Prop "Type",	"Diode",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"DIO:DIODE-SCHOTTKY"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"ANODE"
+			....PinName	"CATHODE"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"A"
+			....PinNumber	"K"
+
+.Number "DP-RM-DIO-02960"
+	..Name "BZT52C15T-7"
+		...Default
+	..Label "SOD-523"
+		...Default
+	..Desc "DIODE ZENER 15V 300mW 30E SOD523 RoHS"
+	..RefPrefix "D"
+	..TopCell "SOD-523"
+	..BottomCell ""
+	..Modified	1703162872 ! 21-Dec-23 06:17 PM
+	..Prop "Type",	"Diode",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"DIO:DIODE-ZENER"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"ANODE"
+			....PinName	"CATHODE"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"A"
+			....PinNumber	"K"
+
+.Number "DP-RM-DIO-02981"
+	..Name "PMEG6010CEJF"
+		...Default
+	..Label "SOD-323-0P8"
+		...Default
+	..Desc "DIODE SCHOTTKY 60V 1A SOD323F (SC-90)"
+	..RefPrefix "D"
+	..TopCell "SOD-323-0P8"
+	..BottomCell ""
+	..Modified	1716817726 ! 27-May-24 07:18 PM
+	..Prop "Type",	"Diode",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"DIO:DIODE-SCHOTTKY"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"ANODE"
+			....PinName	"CATHODE"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"A"
+			....PinNumber	"K"
+
+.Number "DP-RM-DIO-03005"
+	..Name "BAT46WS"
+		...Default
+	..Label "SOD-323"
+	..Desc "DIO Schottky 100V 0.15A 0.25Vf 5uA-Rleak SOD-323F RoHS"
+	..RefPrefix "D"
+	..TopCell "SOD-323"
+	..BottomCell ""
+	..Modified	1773384166 ! 13-Mar-26 12:12 PM
+	..Prop "Type",	"Diode",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"DIO:DIODE-SCHOTTKY"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"ANODE"
+			....PinName	"CATHODE"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"A"
+			....PinNumber	"K"
+
+.Number "DP-RM-FIL-00880"
+	..Name "MI0805K110R-10"
+		...Default
+	..Label "L0805"
+		...Default
+	..Desc "FERRITE CHIP 11E@100MHz 1.5A 60mE DCR 0805 SMD RoHs"
+	..RefPrefix "L"
+	..TopCell "L0805"
+	..BottomCell ""
+	..Modified	1569332595 ! 24-Sep-19 07:13 PM
+	..Prop "Type",	"Inductor",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Input",	"Text"
+	..Symbol	"FIL:INDUCTOR-FIL"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-ICS-26099"
+	..Name "ADP1074ACCZ-R7"
+		...Default
+	..Label "LGA24-CC-24-6"
+		...Default
+	..Desc "ICS ISO Sync Active Clamp Fwd (ACF) Current Mode PWM Controller with iCoupler 4.7-60Vin 600kHz 24-LGA RoHS"
+	..RefPrefix "U"
+	..TopCell "LGA24-CC-24-6"
+	..BottomCell ""
+	..Modified	1768393967 ! 14-Jan-26 06:02 PM
+	..Prop "Type",	"IC",	"Text"
+	..Prop "Approved",	"NOT APPROVED",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapID	"P3"
+		...SwapID	"P4"
+		...SwapID	"P5"
+		...SwapID	"P6"
+		...SwapID	"P7"
+		...SwapID	"P8"
+		...SwapID	"P9"
+		...SwapID	"P10"
+		...SwapID	"P11"
+		...SwapID	"P12"
+		...SwapID	"P13"
+		...SwapID	"P14"
+		...SwapID	"P15"
+		...SwapID	"P16"
+		...SwapID	"P17"
+		...SwapID	"P18"
+		...SwapID	"P19"
+		...SwapID	"P20"
+		...SwapID	"P21"
+		...SwapID	"P22"
+		...SwapID	"P23"
+		...SwapID	"P24"
+		...SwapID	"P25"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"GROUND",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"GROUND",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"GROUND",	"Text"
+		...SwapIDProperties	"P3"
+			....Prop "Pin Type",	"GROUND",	"Text"
+		...SwapIDProperties	"P4"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P5"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P6"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P7"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P8"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P9"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P10"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P11"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P12"
+			....Prop "Pin Type",	"Bidir",	"Text"
+		...SwapIDProperties	"P13"
+			....Prop "Pin Type",	"Bidir",	"Text"
+		...SwapIDProperties	"P14"
+			....Prop "Pin Type",	"Output",	"Text"
+		...SwapIDProperties	"P15"
+			....Prop "Pin Type",	"Output",	"Text"
+		...SwapIDProperties	"P16"
+			....Prop "Pin Type",	"Output",	"Text"
+		...SwapIDProperties	"P17"
+			....Prop "Pin Type",	"Bidir",	"Text"
+		...SwapIDProperties	"P18"
+			....Prop "Pin Type",	"Bidir",	"Text"
+		...SwapIDProperties	"P19"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P20"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P21"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P22"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P23"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P24"
+			....Prop "Pin Type",	"GROUND",	"Text"
+		...SwapIDProperties	"P25"
+			....Prop "Pin Type",	"GROUND",	"Text"
+	..Symbol	"ICS:ADP1074ACCZ"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"PGND1"
+			....PinName	"AGND1-1"
+			....PinName	"AGND2-1"
+			....PinName	"PGND2"
+			....PinName	"DMAX"
+			....PinName	"RT"
+			....PinName	"MODE"
+			....PinName	"FB"
+			....PinName	"SS1"
+			....PinName	"SS2"
+			....PinName	"EN"
+			....PinName	"CS"
+			....PinName	"SYNC"
+			....PinName	"COMP"
+			....PinName	"SR2"
+			....PinName	"SR1"
+			....PinName	"PGOOD#"
+			....PinName	"NGATE"
+			....PinName	"PGATE"
+			....PinName	"VREG1"
+			....PinName	"VIN"
+			....PinName	"OVP"
+			....PinName	"VDD2"
+			....PinName	"VREG2"
+			....PinName	"AGND1-2"
+			....PinName	"AGND2-2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"3"
+			....PinNumber	"4"
+			....PinNumber	"21"
+			....PinNumber	"22"
+			....PinNumber	"12"
+			....PinNumber	"9"
+			....PinNumber	"13"
+			....PinNumber	"17"
+			....PinNumber	"11"
+			....PinNumber	"15"
+			....PinNumber	"7"
+			....PinNumber	"8"
+			....PinNumber	"10"
+			....PinNumber	"16"
+			....PinNumber	"23"
+			....PinNumber	"24"
+			....PinNumber	"14"
+			....PinNumber	"1"
+			....PinNumber	"2"
+			....PinNumber	"5"
+			....PinNumber	"6"
+			....PinNumber	"18"
+			....PinNumber	"19"
+			....PinNumber	"20"
+			....PinNumber	"25"
+			....PinNumber	"26"
+
+.Number "DP-RM-ICS-26123"
+	..Name "MIC4120YML-TR"
+		...Default
+	..Label "VDFN8-0P65-3X3-1MM"
+		...Default
+	..Desc "ICS 1-CH N-ISO Non-Inverting MOSFET Gate-Driver (Low Side) 6A Ipeak 4.5-20Vo/Vcc VDFN-8 RoHs"
+	..RefPrefix "U"
+	..TopCell "VDFN8-0P65-3X3-1MM"
+	..BottomCell ""
+	..Modified	1768976226 ! 21-Jan-26 11:47 AM
+	..Prop "Type",	"IC",	"Text"
+	..Prop "Approved",	"NOT APPROVED",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapID	"P3"
+		...SwapID	"P4"
+		...SwapID	"P5"
+		...SwapID	"P6"
+		...SwapID	"P7"
+		...SwapID	"P8"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"GROUND",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"GROUND",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"GROUND",	"Text"
+		...SwapIDProperties	"P3"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P4"
+			....Prop "Pin Type",	"Bidir",	"Text"
+		...SwapIDProperties	"P5"
+			....Prop "Pin Type",	"Output",	"Text"
+		...SwapIDProperties	"P6"
+			....Prop "Pin Type",	"Output",	"Text"
+		...SwapIDProperties	"P7"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P8"
+			....Prop "Pin Type",	"POWER",	"Text"
+	..Symbol	"ICS:MIC4120-129"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"E-PAD"
+			....PinName	"GND1"
+			....PinName	"GND2"
+			....PinName	"IN"
+			....PinName	"NC"
+			....PinName	"OUT1"
+			....PinName	"OUT2"
+			....PinName	"VS1"
+			....PinName	"VS2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"9"
+			....PinNumber	"4"
+			....PinNumber	"5"
+			....PinNumber	"2"
+			....PinNumber	"3"
+			....PinNumber	"6"
+			....PinNumber	"7"
+			....PinNumber	"1"
+			....PinNumber	"8"
+
+.Number "DP-RM-ICS-26124"
+	..Name "LM5169FNGUR"
+		...Default
+	..Label "WSON9-4X4-0P8PITCH"
+		...Default
+	..Desc "ICS Sync Buck/Fly-buck Converter w/ INT FETs Vin: 6-120Vdc ISW-Pk 0.65A WSON-8 (4.1x4.1x0.8)mm IND RoHS"
+	..RefPrefix "U"
+	..TopCell "WSON9-4X4-0P8PITCH"
+	..BottomCell ""
+	..Modified	1769149422 ! 23-Jan-26 11:53 AM
+	..Prop "Type",	"IC",	"Text"
+	..Prop "Approved",	"NOT APPROVED",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapID	"P3"
+		...SwapID	"P4"
+		...SwapID	"P5"
+		...SwapID	"P6"
+		...SwapID	"P7"
+		...SwapID	"P8"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Output",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P3"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P4"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P5"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P6"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P7"
+			....Prop "Pin Type",	"GROUND",	"Text"
+		...SwapIDProperties	"P8"
+			....Prop "Pin Type",	"GROUND",	"Text"
+	..Symbol	"ICS:LM5169"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"PGOOD"
+			....PinName	"VIN"
+			....PinName	"RT"
+			....PinName	"EN/UVLO"
+			....PinName	"BST"
+			....PinName	"SW"
+			....PinName	"FB"
+			....PinName	"E-PAD"
+			....PinName	"GND"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"6"
+			....PinNumber	"2"
+			....PinNumber	"4"
+			....PinNumber	"3"
+			....PinNumber	"7"
+			....PinNumber	"8"
+			....PinNumber	"5"
+			....PinNumber	"9"
+			....PinNumber	"1"
+
+.Number "DP-RM-IND-14175"
+	..Name "SRP1038A-1R5M"
+		...Default
+	..Label "IND-SRP1038A"
+		...Default
+	..Desc "IND PWR 1.5uH 16A 4mE 20% 33Asat Shld 2-SMD 11x10x3.8mm RoHs"
+	..RefPrefix "L"
+	..TopCell "IND-SRP1038A"
+	..BottomCell ""
+	..Modified	1725369218 ! 03-Sep-24 06:43 PM
+	..Prop "Type",	"Inductor",	"Text"
+	..Prop "Value",	"1.5u",	"Real"
+	..Prop "Approved",	"NOT APPROVED",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"IND:INDUCTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-IND-14260"
+	..Name "MA5401-AEC"
+		...Default
+	..Label "IND-LPD5030V"
+		...Default
+	..Desc "IND ARRAY-2 DIR-Coupled 1:1 220uH 0.2A 20% 5.25E 4-SMD RoHs 4.8x4.8x2.9mm"
+	..RefPrefix "L"
+	..TopCell "IND-LPD5030V"
+	..BottomCell ""
+	..Modified	1774871881 ! 30-Mar-26 05:28 PM
+	..Prop "Type",	"Inductor",	"Text"
+	..Prop "Value",	"220u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapID	"P3"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Bidir",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Bidir",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"Bidir",	"Text"
+		...SwapIDProperties	"P3"
+			....Prop "Pin Type",	"Bidir",	"Text"
+	..Symbol	"IND:COMMON-MODE-CHOKE-3"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+			....PinName	"4"
+			....PinName	"3"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+			....PinNumber	"4"
+			....PinNumber	"3"
+
+.Number "DP-RM-RES-03500"
+	..Name "ERJ-6GEYJ100V"
+		...Default
+	..Label "R0805"
+		...Default
+	..Desc "RES 10 Ohm 0.125W 5% 200ppm TKF 0805 RoHs"
+	..RefPrefix "R"
+	..TopCell "R0805"
+	..BottomCell ""
+	..Modified	1529566333 ! 21-Jun-18 01:02 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"10",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-06230"
+	..Name "CRCW06030000Z0EAC"
+		...Default
+	..Label "R0603"
+		...Default
+	..Desc "RES 0 Ohm 0.1W 20mE max 2.0A 0603"
+	..RefPrefix "R"
+	..TopCell "R0603"
+	..BottomCell ""
+	..Modified	1780653133 ! 05-Jun-26 03:22 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"0",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-06230-PWR-SHORT"
+	..Name "CRCW06030000Z0EAC"
+	..Label "R0603-PWR-SHORT"
+		...Default
+	..Desc "RES 0 Ohm 0.1W 20mE max 2.0A 0603"
+	..RefPrefix "R"
+	..TopCell "R0603-PWR-SHORT"
+	..BottomCell ""
+	..Modified	1780653127 ! 05-Jun-26 03:22 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"0",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-06230-3PAD"
+	..Name "CRCW06030000Z0EAC"
+	..Label "R0603-3PAD"
+		...Default
+	..Desc "RES 0 Ohm 0.1W 20mE max 2.0A 0603"
+	..RefPrefix "M"
+	..TopCell "R0603-3PAD"
+	..BottomCell ""
+	..Modified	1780653116 ! 05-Jun-26 03:21 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"0",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR-3PAD"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+			....PinName	"3"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+			....PinNumber	"3"
+
+.Number "DP-RM-RES-06310"
+	..Name "CRG0603F10K/10"
+		...Default
+	..Label "R0603"
+	..Desc "RES 10K Ohm 0.1W 1% 100PPM 0603"
+	..RefPrefix "R"
+	..TopCell "R0603"
+	..BottomCell ""
+	..Modified	1780487432 ! 03-Jun-26 05:20 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"10K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-09901"
+	..Name "ERA-3AEB203V"
+		...Default
+	..Label "R0603"
+	..Desc "RES Precision 20K Ohm 0.1W 0.1% 25PPM 0603"
+	..RefPrefix "R"
+	..TopCell "R0603"
+	..BottomCell ""
+	..Modified	1672401554 ! 30-Dec-22 05:29 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"20K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-10270"
+	..Name "ERA-3YEB822V"
+		...Default
+	..Label "R0603"
+	..Desc "RES Precision 8.2K Ohm 0.1W 0.1% 25PPM 0603"
+	..RefPrefix "R"
+	..TopCell "R0603"
+	..BottomCell ""
+	..Modified	1308226125 ! 16-Jun-11 05:38 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"8.2K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-11190"
+	..Name "ERJ-12SF1002U"
+		...Default
+	..Label "R2010"
+		...Default
+	..Desc "RES 10K Ohm 0.75W 1% 100PPM 2010"
+	..RefPrefix "R"
+	..TopCell "R2010"
+	..BottomCell ""
+	..Modified	1563866749 ! 23-Jul-19 12:55 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"10K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-12110"
+	..Name "ERJ-2GEJ102X"
+		...Default
+	..Label "R0402"
+		...Default
+	..Desc "RES 1K Ohm 0.1W 5% 200PPM 0402 RoHs"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1553173872 ! 21-Mar-19 06:41 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"1K",	"Real"
+	..Prop "Rated Power Dissipation in W",	"100m",	"Real"
+	..Prop "Max Operating Temperature in DegC",	"155",	"Real"
+	..Prop "Weight in grams",	"800u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-12203"
+	..Name "ERJ-2GEJ303X"
+		...Default
+	..Label "R0402"
+	..Desc "RES 30K Ohm 0.1W 5% 200PPM 0402"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1563870779 ! 23-Jul-19 02:02 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"30K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-12330"
+	..Name "560050310009"
+		...Default
+	..Label "R0402"
+	..Desc "RES 10 Ohm 0.1W 1% 100ppm 0402 SMD RoHs"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1780487497 ! 03-Jun-26 05:21 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"10",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-12480"
+	..Name "RP73PF1E22K1BTD"
+		...Default
+	..Label "R0402"
+	..Desc "RES 22.1K Ohm 0.1W 1% 100PPM 0402"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1781702351 ! 17-Jun-26 06:49 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"22.1K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-12486"
+	..Name "ERJ-2RKF6041X"
+		...Default
+	..Label "R0402"
+	..Desc "RES 6.04K Ohm 0.1W 1% 100PPM 0402"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1563871124 ! 23-Jul-19 02:08 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"6.04K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-12820"
+	..Name "ERJ-2RKF7871X"
+		...Default
+	..Label "R0402"
+	..Desc "RES 7.87K Ohm 0.1W 1% 100PPM 0402"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1563871656 ! 23-Jul-19 02:17 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"7.87K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-15241"
+	..Name "ERJ-6ENF2492V"
+		...Default
+	..Label "R0805"
+	..Desc "RES 24.9K Ohm 0.125W 1% 100PPM 0805"
+	..RefPrefix "R"
+	..TopCell "R0805"
+	..BottomCell ""
+	..Modified	1563872475 ! 23-Jul-19 02:31 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"24.9K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-20427"
+	..Name "MCR01MZPF2492"
+		...Default
+	..Label "R0402"
+	..Desc "RES 24.9K Ohm 0.063W 1% 100PPM 0402"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1563867482 ! 23-Jul-19 01:08 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"24.9K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-21650"
+	..Name "MCR10EZHF2201"
+		...Default
+	..Label "R0805"
+	..Desc "RES 2.2K Ohm 0.125W 1% 100PPM 0805"
+	..RefPrefix "R"
+	..TopCell "R0805"
+	..BottomCell ""
+	..Modified	1498216909 ! 23-Jun-17 04:51 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"2.2K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-28350"
+	..Name "RG1608P-104-B-T5"
+		...Default
+	..Label "R0603"
+	..Desc "RES Precision 100K Ohm 0.1W 0.1% 25PPM 0603 RoHs"
+	..RefPrefix "R"
+	..TopCell "R0603"
+	..BottomCell ""
+	..Modified	1600068740 ! 14-Sep-20 01:02 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"100K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-28360"
+	..Name "RG1608P-1242-B-T5"
+		...Default
+	..Label "R0603"
+	..Desc "RES Precision 12.4K Ohm 0.1W 0.1% 25PPM 0603"
+	..RefPrefix "R"
+	..TopCell "R0603"
+	..BottomCell ""
+	..Modified	1600068747 ! 14-Sep-20 01:02 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"12.4K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-29020"
+	..Name "RG1005P-104-D-T10"
+		...Default
+	..Label "R0402"
+	..Desc "RES Precision 100K Ohm 0.063W 0.5% 25PPM 0402"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1553325647 ! 23-Mar-19 12:50 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"100K",	"Real"
+	..Prop "Rated Power Dissipation in W",	"63m",	"Real"
+	..Prop "Max Operating Temperature in DegC",	"155",	"Real"
+	..Prop "Weight in grams",	"650u",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-29995"
+	..Name "WJC0805LJUMPFNR"
+		...Default
+	..Label "WJC-0805"
+		...Default
+	..Desc "RES 0 Ohm 0.2W 0.2mE max 35A High Current Jumper 0805 RoHS"
+	..RefPrefix "R"
+	..TopCell "WJC-0805"
+	..BottomCell ""
+	..Modified	1777384657 ! 28-Apr-26 07:27 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"0",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-30281"
+	..Name "ERA-3AEB682V"
+		...Default
+	..Label "R0603"
+	..Desc "RES Precision 6.8K Ohm 0.1W 0.5% 25PPM 0603"
+	..RefPrefix "R"
+	..TopCell "R0603"
+	..BottomCell ""
+	..Modified	1753847999 ! 30-Jul-25 09:29 AM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"6.8K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-35599"
+	..Name "TNPW060340K2BEEA"
+		...Default
+	..Label "R0603"
+	..Desc "RES Precision 40.2K Ohm 0.1W 0.1% 25PPM 0603"
+	..RefPrefix "R"
+	..TopCell "R0603"
+	..BottomCell ""
+	..Modified	1483960786 ! 09-Jan-17 04:49 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"40.2K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-35691"
+	..Name "CRCW040224K3FKED"
+		...Default
+	..Label "R0402"
+	..Desc "RES 24.3K Ohm 0.063W 1% 100ppm 0402 AEC-Q200 RoHs"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1585739647 ! 01-Apr-20 04:44 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"24.3K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-35873"
+	..Name "CRCW040241K2FKED"
+		...Default
+	..Label "R0402"
+	..Desc "RES 41.2K Ohm 0.063W 1% 100PPM 0402"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1699079856 ! 04-Nov-23 12:07 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"41.2K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-36013"
+	..Name "TLRH3APTTE8L00F"
+		...Default
+	..Label "TLRH-3AP"
+		...Default
+	..Desc "RES CSR 0.008 Ohms 5W 1% 75PPM 2512-2 SMD RoHs"
+	..RefPrefix "R"
+	..TopCell "TLRH-3AP"
+	..BottomCell ""
+	..Modified	1775456724 ! 06-Apr-26 11:55 AM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"8m",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-RES-70033"
+	..Name "ERJ-2RKF4701X"
+		...Default
+	..Label "R0402"
+	..Desc "RES 4.7K OHM 0.1W 1% 100PPM 0402"
+	..RefPrefix "R"
+	..TopCell "R0402"
+	..BottomCell ""
+	..Modified	1777031996 ! 24-Apr-26 05:29 PM
+	..Prop "Type",	"Resistor",	"Text"
+	..Prop "Value",	"4.7K",	"Real"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Any",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Any",	"Text"
+	..Symbol	"RES:RESISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"1"
+			....PinName	"2"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+
+.Number "DP-RM-TRA-01659"
+	..Name "ZXTP25100BFHTA"
+		...Default
+	..Label "SOT23-BCE"
+		...Default
+	..Desc "TRA PNP 100V 2A 1.25W 200MHz BJT SMT SOT23-3"
+	..RefPrefix "Q"
+	..TopCell "SOT23-BCE"
+	..BottomCell ""
+	..Modified	1496386098 ! 02-Jun-17 12:18 PM
+	..Prop "Type",	"BJT",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"TRA:PNP-TRANSISTOR"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"BASE"
+			....PinName	"COLLECTOR"
+			....PinName	"EMITTER"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"B"
+			....PinNumber	"C"
+			....PinNumber	"E"
+
+.Number "DP-RM-TRA-25486"
+	..Name "BSC088N15LS5ATMA1"
+		...Default
+	..Label "PG-TDSON-8-1P2"
+		...Default
+	..Desc "MOSFET N-CH 150V 87A 7.6mE 139W 680pF SMT PG-TDSON-8 RoHs"
+	..RefPrefix "Q"
+	..TopCell "PG-TDSON-8-1P2"
+	..BottomCell ""
+	..Modified	1726143600 ! 12-Sep-24 05:50 PM
+	..Prop "Type",	"MOSFET",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapID	"P3"
+		...SwapID	"P4"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P3"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P4"
+			....Prop "Pin Type",	"POWER",	"Text"
+	..Symbol	"TRA:MOSFET4CHANNEL-BSC070N10LS5"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"S1"
+			....PinName	"S2"
+			....PinName	"S3"
+			....PinName	"G"
+			....PinName	"D"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+			....PinNumber	"3"
+			....PinNumber	"4"
+			....PinNumber	"5"
+
+.Number "DP-RM-TRA-25486-SPL1"
+	..Name "BSC088N15LS5ATMA1"
+	..Label "PG-TDSON-8-1P2-SPL1"
+		...Default
+	..Desc "MOSFET N-CH 150V 87A 7.6mE 139W 680pF SMT PG-TDSON-8 RoHs"
+	..RefPrefix "Q"
+	..TopCell "PG-TDSON-8-1P2-SPL1"
+	..BottomCell ""
+	..Modified	1779787216 ! 26-May-26 02:50 PM
+	..Prop "Type",	"MOSFET",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapID	"P3"
+		...SwapID	"P4"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"POWER",	"Text"
+		...SwapIDProperties	"P3"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P4"
+			....Prop "Pin Type",	"POWER",	"Text"
+	..Symbol	"TRA:MOSFET4CHANNEL-BSC070N10LS5"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"S1"
+			....PinName	"S2"
+			....PinName	"S3"
+			....PinName	"G"
+			....PinName	"D"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+			....PinNumber	"2"
+			....PinNumber	"3"
+			....PinNumber	"4"
+			....PinNumber	"5"
+
+.Number "DP-RM-TRA-25493"
+	..Name "SiSS73DN-T1-GE3"
+		...Default
+	..Label "POWER-PAK-1212-8-0P83"
+		...Default
+	..Desc "MOSFET P-CH 150V 16.2A 125mE 65.8W 719pF SMT PowerPAK 1212-8S RoHs"
+	..RefPrefix "Q"
+	..TopCell "POWER-PAK-1212-8-0P83"
+	..BottomCell ""
+	..Modified	1744094626 ! 08-Apr-25 12:13 PM
+	..Prop "Type",	"MOSFET",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapID	"P1"
+		...SwapID	"P2"
+		...SwapID	"P3"
+		...SwapID	"P4"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Output",	"Text"
+		...SwapIDProperties	"P1"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P2"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P3"
+			....Prop "Pin Type",	"Input",	"Text"
+		...SwapIDProperties	"P4"
+			....Prop "Pin Type",	"Output",	"Text"
+	..Symbol	"TRA:P-MOSFET-SO-8L"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"G"
+			....PinName	"S2"
+			....PinName	"S1"
+			....PinName	"S3"
+			....PinName	"D"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"4"
+			....PinNumber	"2"
+			....PinNumber	"1"
+			....PinNumber	"3"
+			....PinNumber	"5"
+
+.Number "TEST POINT-40"
+	..Name "TEST POINT-40"
+		...Default
+	..Label "TESTPOINT-SMD-40"
+		...Default
+	..Desc "TESTPOINT-SMD-40"
+	..RefPrefix "TP"
+	..TopCell "TESTPOINT-SMD-40"
+	..BottomCell ""
+	..Modified	1569211978 ! 23-Sep-19 09:42 AM
+	..Prop "Type",	"Misc",	"Text"
+	..SwapGroup	"gate"
+		...SwapID	"P0"
+		...SwapIDProperties	"P0"
+			....Prop "Pin Type",	"Input",	"Text"
+	..Symbol	"CONR:TESTPOINT"
+		...Default
+		...Symbol_SwapGroup	"gate"
+			....PinName	"TEST"
+	..Slots
+		...Slot_SwapGroup	"gate"
+			....SlotID	1
+			....SwapCode	0
+			....PinNumber	"1"
+
