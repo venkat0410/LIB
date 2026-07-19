@@ -18,7 +18,9 @@ const PAGE_TITLES = {
   dashboard: "Dashboard",
   stencil: "Stencil Aperture Calculator",
   throughhole: "Through-Hole Pad & Drill Calculator",
+  pthpadstack: "PTH Pad Stack Engineering Workstation",
   converter: "Engineering Unit Converter",
+  wiring: "Wiring Option",
   history: "Calculation History",
 };
 
@@ -53,6 +55,11 @@ function navigateTo(pageId) {
 
   // Refresh history page
   if (pageId === "history") renderHistoryList();
+
+  // Refresh PTH pad stack workstation view
+  if (pageId === "pthpadstack" && typeof initPthPadStackWorkstation === "function") {
+    initPthPadStackWorkstation();
+  }
 }
 
 // Nav click handlers
@@ -889,7 +896,12 @@ document.getElementById("copyTHResults").addEventListener("click", () => {
 
 
 // ============================================================
-// 6. MODULE 3: ENGINEERING UNIT CONVERTER
+// 6. MODULE 3: PTH PAD STACK WORKSTATION — see pth_pad_stack_workstation.js
+// ============================================================
+
+
+// ============================================================
+// 7. MODULE 4: ENGINEERING UNIT CONVERTER
 // ============================================================
 
 /**
@@ -1016,7 +1028,247 @@ function saveConversion(label, from, to) {
 
 
 // ============================================================
-// 7. HISTORY RENDERING & SEARCH
+// 8. MODULE 5: WIRING OPTION
+// ============================================================
+
+const AWG_WIRE_DATABASE = [
+  { awg: 32, strandAwg: "7/40", strandDia: "7/0.08 mm", conductorDiaMm: 0.24, insulationDiaMm: 1.11, currentA: 0.7, partNo: "200C-740" },
+  { awg: 30, strandAwg: "7/38", strandDia: "7/0.10 mm", conductorDiaMm: 0.30, insulationDiaMm: 1.16, currentA: 1.0, partNo: "200C-738" },
+  { awg: 28, strandAwg: "1/28", strandDia: "1/0.32 mm", conductorDiaMm: 0.32, insulationDiaMm: 1.19, currentA: 2.1, partNo: "200C-28" },
+  { awg: 28, strandAwg: "7/36", strandDia: "7/0.13 mm", conductorDiaMm: 0.38, insulationDiaMm: 1.24, currentA: 2.1, partNo: "200C-736", preferred: true },
+  { awg: 26, strandAwg: "1/26", strandDia: "1/0.40 mm", conductorDiaMm: 0.40, insulationDiaMm: 1.27, currentA: 3.0, partNo: "200C-26" },
+  { awg: 26, strandAwg: "7/34", strandDia: "7/0.16 mm", conductorDiaMm: 0.48, insulationDiaMm: 1.34, currentA: 3.0, partNo: "200C-734" },
+  { awg: 26, strandAwg: "19/38", strandDia: "19/0.10 mm", conductorDiaMm: 0.51, insulationDiaMm: 1.34, currentA: 3.0, partNo: "200C-1938", preferred: true },
+  { awg: 24, strandAwg: "1/24", strandDia: "1/0.51 mm", conductorDiaMm: 0.51, insulationDiaMm: 1.37, currentA: 4.0, partNo: "200C-124" },
+  { awg: 24, strandAwg: "7/32", strandDia: "7/0.20 mm", conductorDiaMm: 0.60, insulationDiaMm: 1.47, currentA: 4.0, partNo: "200C-732" },
+  { awg: 22, strandAwg: "19/36", strandDia: "19/0.13 mm", conductorDiaMm: 0.65, insulationDiaMm: 1.57, currentA: 7.0, partNo: "200C-1936", preferred: true },
+  { awg: 22, strandAwg: "1/22", strandDia: "1/0.64 mm", conductorDiaMm: 0.64, insulationDiaMm: 1.52, currentA: 7.3, partNo: "200C-122" },
+  { awg: 22, strandAwg: "7/30", strandDia: "7/0.25 mm", conductorDiaMm: 0.75, insulationDiaMm: 1.62, currentA: 7.3, partNo: "200C-730" },
+  { awg: 22, strandAwg: "19/34", strandDia: "19/0.16 mm", conductorDiaMm: 0.80, insulationDiaMm: 1.62, currentA: 7.3, partNo: "200C-1934", preferred: true },
+  { awg: 20, strandAwg: "1/20", strandDia: "1/0.81 mm", conductorDiaMm: 0.81, insulationDiaMm: 1.67, currentA: 11.0, partNo: "200C-120" },
+  { awg: 20, strandAwg: "7/28", strandDia: "7/0.32 mm", conductorDiaMm: 0.96, insulationDiaMm: 1.82, currentA: 11.0, partNo: "200C-728" },
+  { awg: 20, strandAwg: "19/32", strandDia: "19/0.20 mm", conductorDiaMm: 1.00, insulationDiaMm: 1.82, currentA: 11.0, partNo: "200C-1932", preferred: true },
+  { awg: 18, strandAwg: "1/18", strandDia: "1/1.02 mm", conductorDiaMm: 1.02, insulationDiaMm: 1.93, currentA: 11.0, partNo: "200C-118" },
+  { awg: 18, strandAwg: "7/26", strandDia: "7/0.40 mm", conductorDiaMm: 1.22, insulationDiaMm: 2.13, currentA: 16.0, partNo: "200C-726" },
+  { awg: 18, strandAwg: "19/30", strandDia: "19/0.25 mm", conductorDiaMm: 1.25, insulationDiaMm: 2.13, currentA: 16.0, partNo: "200C-1930", preferred: true },
+  { awg: 16, strandAwg: "19/29", strandDia: "19/0.29 mm", conductorDiaMm: 1.45, insulationDiaMm: 2.41, currentA: 22.0, partNo: "200C-1929", preferred: true },
+  { awg: 16, strandAwg: "19/28", strandDia: "19/0.32 mm", conductorDiaMm: 1.50, insulationDiaMm: 2.54, currentA: 26.0, partNo: "200C-1928" },
+  { awg: 14, strandAwg: "19/27", strandDia: "19/0.36 mm", conductorDiaMm: 1.80, insulationDiaMm: 2.89, currentA: 22.0, partNo: "200C-1927", preferred: true },
+  { awg: 13, strandAwg: "19/26", strandDia: "19/0.40 mm", conductorDiaMm: 2.00, insulationDiaMm: 3.02, currentA: 35.0, partNo: "200C-1926" },
+  { awg: 12, strandAwg: "19/25", strandDia: "19/0.45 mm", conductorDiaMm: 2.25, insulationDiaMm: 3.37, currentA: 41.0, partNo: "200C-1925" },
+  { awg: 12, strandAwg: "37/28", strandDia: "37/0.32 mm", conductorDiaMm: 2.24, insulationDiaMm: 3.23, currentA: 41.0, partNo: "200C-3728" },
+  { awg: 11, strandAwg: "19/24", strandDia: "19/0.50 mm", conductorDiaMm: 2.50, insulationDiaMm: 3.58, currentA: 45.0, partNo: "200C-1924" },
+  { awg: 10, strandAwg: "19/22", strandDia: "19/0.65 mm", conductorDiaMm: 3.25, insulationDiaMm: 4.34, currentA: 55.0, partNo: "200C-1922" },
+  { awg: 10, strandAwg: "37/26", strandDia: "37/0.40 mm", conductorDiaMm: 2.80, insulationDiaMm: 3.88, currentA: 50.0, partNo: "200C-3726" },
+  { awg: 8, strandAwg: "133/29", strandDia: "133/0.29 mm", conductorDiaMm: 4.29, insulationDiaMm: 5.56, currentA: 75.0, partNo: "200C-13329" },
+  { awg: 6, strandAwg: "133/27", strandDia: "133/0.36 mm", conductorDiaMm: 5.41, insulationDiaMm: 6.93, currentA: 100.0, partNo: "200C-13327" },
+];
+
+let wiringPinCounter = 0;
+let currentWiringResults = [];
+
+function roundUpEvenMil(valueMil) {
+  const rounded = Math.ceil(valueMil);
+  return rounded % 2 === 0 ? rounded : rounded + 1;
+}
+
+function addWiringPinEntry(pin = {}) {
+  wiringPinCounter++;
+  const container = document.getElementById("wiringPinEntries");
+  const entry = document.createElement("div");
+  entry.className = "component-entry wiring-entry";
+  entry.id = `wire-pin-${wiringPinCounter}`;
+  entry.innerHTML = `
+    <div class="form-group">
+      <label>Pin Number</label>
+      <input type="text" class="form-control" placeholder="e.g. 1" data-field="pinNo" value="${pin.pinNo || ""}" />
+    </div>
+    <div class="form-group">
+      <label>Pin Name</label>
+      <input type="text" class="form-control" placeholder="e.g. +IN" data-field="pinName" value="${pin.pinName || ""}" />
+    </div>
+    <div class="form-group">
+      <label>Current Rating (A)</label>
+      <input type="number" class="form-control" placeholder="e.g. 8" step="0.1" min="0" data-field="currentA" value="${pin.currentA || ""}" />
+    </div>
+    <div class="form-group">
+      <label>Pin Diameter (mm)</label>
+      <input type="number" class="form-control" placeholder="Optional" step="0.01" min="0" data-field="pinDiaMm" value="${pin.pinDiaMm || ""}" />
+    </div>
+    <button class="btn btn-danger btn-icon" title="Remove">x</button>
+  `;
+  entry.querySelector("button").addEventListener("click", () => entry.remove());
+  container.appendChild(entry);
+}
+
+function selectWireForCurrent(currentA) {
+  const suitable = AWG_WIRE_DATABASE
+    .filter((wire) => wire.currentA >= currentA)
+    .sort((a, b) =>
+      (a.preferred === b.preferred ? 0 : a.preferred ? -1 : 1) ||
+      a.currentA - b.currentA ||
+      a.conductorDiaMm - b.conductorDiaMm
+    );
+
+  if (suitable.length > 0) return { wire: suitable[0], status: "OK" };
+
+  return {
+    wire: AWG_WIRE_DATABASE[AWG_WIRE_DATABASE.length - 1],
+    status: "Input current exceeds listed Flutef table range",
+  };
+}
+
+function calculateWiringOptions() {
+  const entries = document.querySelectorAll(".wiring-entry");
+  const rows = [];
+  const steps = [];
+
+  entries.forEach((entry, index) => {
+    const pinNo = entry.querySelector('[data-field="pinNo"]').value.trim() || `${index + 1}`;
+    const pinName = entry.querySelector('[data-field="pinName"]').value.trim() || `Pin ${index + 1}`;
+    const currentA = parseFloat(entry.querySelector('[data-field="currentA"]').value);
+    const pinDiaRaw = parseFloat(entry.querySelector('[data-field="pinDiaMm"]').value);
+    const pinDiaMm = !isNaN(pinDiaRaw) && pinDiaRaw > 0 ? pinDiaRaw : 0;
+
+    if (isNaN(currentA) || currentA <= 0) return;
+
+    const selection = selectWireForCurrent(currentA);
+    const wire = selection.wire;
+    const conductorCriteriaMm = Math.max(wire.conductorDiaMm * 3, pinDiaMm);
+    const insulationCriteriaMm = Math.max(wire.insulationDiaMm * 2, pinDiaMm);
+    const totalDiameterMm = Math.max(conductorCriteriaMm, insulationCriteriaMm);
+    const requiredDrillRawMil = (totalDiameterMm + 0.2) * MM_TO_MIL;
+    const requiredDrillMil = roundUpEvenMil(requiredDrillRawMil);
+    const solderPadMil = requiredDrillMil + 20;
+    const governing = insulationCriteriaMm >= conductorCriteriaMm ? "B" : "A";
+
+    rows.push({
+      pinNo,
+      pinName,
+      inputCurrentA: currentA.toFixed(2),
+      pinDia: pinDiaMm ? `${pinDiaMm.toFixed(2)} mm` : "Not specified",
+      awg: wire.awg,
+      strands: `${wire.strandDia} (${wire.strandAwg})`,
+      conductorDia: `${wire.conductorDiaMm.toFixed(2)} mm`,
+      insulationDia: `${wire.insulationDiaMm.toFixed(2)} mm`,
+      wireCurrentA: `${wire.currentA.toFixed(1)} A`,
+      partNo: wire.partNo,
+      criteriaA: `${conductorCriteriaMm.toFixed(2)} mm`,
+      criteriaB: `${insulationCriteriaMm.toFixed(2)} mm`,
+      totalDiameter: `${totalDiameterMm.toFixed(2)} mm (${governing})`,
+      requiredDrill: `${requiredDrillMil.toFixed(0)} mil`,
+      solderPad: `${solderPadMil.toFixed(0)} mil`,
+      status: selection.status,
+    });
+
+    steps.push(
+      `<span class="step-label">${pinNo} - ${pinName}</span>`,
+      `Current ${currentA.toFixed(2)} A selects AWG ${wire.awg}, ${wire.strandDia}, part ${wire.partNo}, rated ${wire.currentA.toFixed(1)} A.`,
+      `A = max(3 x conductor dia, pin dia) = max(${(wire.conductorDiaMm * 3).toFixed(2)}, ${pinDiaMm.toFixed(2)}) = ${conductorCriteriaMm.toFixed(2)} mm.`,
+      `B = max(2 x insulation dia, pin dia) = max(${(wire.insulationDiaMm * 2).toFixed(2)}, ${pinDiaMm.toFixed(2)}) = ${insulationCriteriaMm.toFixed(2)} mm.`,
+      `Total Diameter = larger of A and B = ${totalDiameterMm.toFixed(2)} mm (${governing}).`,
+      `Required PCB Drill = (${totalDiameterMm.toFixed(2)} + 0.20) x 39.3701 = ${requiredDrillRawMil.toFixed(2)} mil, rounded to ${requiredDrillMil.toFixed(0)} mil.`,
+      `Recommended Solder Pad = ${requiredDrillMil.toFixed(0)} + 20 = ${solderPadMil.toFixed(0)} mil.`,
+      selection.status === "OK" ? "" : `<span style="color:var(--accent-rose);">${selection.status}</span>`,
+      ""
+    );
+  });
+
+  if (rows.length === 0) {
+    showToast("Please enter at least one valid wiring current rating.", "error");
+    return;
+  }
+
+  currentWiringResults = rows;
+  document.getElementById("wiringResultBody").innerHTML = rows
+    .map(
+      (row) => `
+        <tr>
+          <td>${row.pinNo}</td>
+          <td>${row.pinName}</td>
+          <td>${row.inputCurrentA}</td>
+          <td>${row.pinDia}</td>
+          <td>${row.awg}</td>
+          <td>${row.strands}</td>
+          <td>${row.conductorDia}</td>
+          <td>${row.insulationDia}</td>
+          <td>${row.wireCurrentA}</td>
+          <td>${row.partNo}</td>
+          <td>${row.criteriaA}</td>
+          <td>${row.criteriaB}</td>
+          <td>${row.totalDiameter}</td>
+          <td>${row.requiredDrill}</td>
+          <td>${row.solderPad}</td>
+        </tr>`
+    )
+    .join("");
+
+  document.getElementById("wiringCalcSteps").innerHTML = steps.join("<br/>");
+  showToast(`Generated ${rows.length} wiring recommendation(s).`, "success");
+}
+
+function csvCell(value) {
+  return `"${String(value).replace(/"/g, '""')}"`;
+}
+
+function downloadWiringReport() {
+  if (currentWiringResults.length === 0) {
+    showToast("Calculate wiring options before downloading.", "error");
+    return;
+  }
+
+  const headers = [
+    "Pin No.",
+    "Pin Name",
+    "Current (A)",
+    "Pin Diameter",
+    "Recommended AWG",
+    "Number of Strands / Strand Diameter",
+    "Conductor Diameter",
+    "Diameter over Insulation",
+    "Wire Current Rating",
+    "Wire Part Number",
+    "Criteria A",
+    "Criteria B",
+    "Total Diameter",
+    "Required PCB Drill Size",
+    "Recommended Solder Pad Size",
+    "Status",
+  ];
+
+  const csvRows = currentWiringResults.map((row) => [
+    row.pinNo,
+    row.pinName,
+    row.inputCurrentA,
+    row.pinDia,
+    row.awg,
+    row.strands,
+    row.conductorDia,
+    row.insulationDia,
+    row.wireCurrentA,
+    row.partNo,
+    row.criteriaA,
+    row.criteriaB,
+    row.totalDiameter,
+    row.requiredDrill,
+    row.solderPad,
+    row.status,
+  ]);
+
+  const csv = [headers, ...csvRows].map((row) => row.map(csvCell).join(",")).join("\n");
+  downloadFile(csv, "wiring_option_report.csv", "text/csv");
+  showToast("Wiring report downloaded.", "success");
+}
+
+document.getElementById("addWiringPinBtn").addEventListener("click", () => addWiringPinEntry());
+document.getElementById("calcWiringBtn").addEventListener("click", calculateWiringOptions);
+document.getElementById("downloadWiringReportBtn").addEventListener("click", downloadWiringReport);
+
+addWiringPinEntry();
+
+
+// ============================================================
+// 8. HISTORY RENDERING & SEARCH
 // ============================================================
 
 function renderHistoryList(filter = "") {
