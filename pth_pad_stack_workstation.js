@@ -106,7 +106,7 @@
       inputDimB.min = "0.1";
       inputDimB.max = "4.0";
       inputDimB.step = "0.01";
-      inputDimB.value = "0.50";
+      inputDimB.value = activeProfile === "square" ? "0.64" : "0.50";
       inputAnnular.value = "0.20";
       inputWander.value = "0.10";
       inputPlating.value = "0.025";
@@ -119,7 +119,7 @@
       inputDimB.min = "4.0";
       inputDimB.max = "160.0";
       inputDimB.step = "0.1";
-      inputDimB.value = "19.7";
+      inputDimB.value = activeProfile === "square" ? "25.2" : "19.7";
       inputAnnular.value = "8.00";
       inputWander.value = "4.00";
       inputPlating.value = "1.00";
@@ -154,6 +154,11 @@
     }
     if (containerDimB) {
       containerDimB.style.display = profile === "square" ? "none" : "";
+    }
+    if (profile === "square") {
+      const dimA = el.inputDimA();
+      const dimB = el.inputDimB();
+      if (dimA && dimB) dimB.value = dimA.value;
     }
 
     const formulaDiagEq = document.getElementById("pthws-formula-diag-eq");
@@ -345,6 +350,15 @@
 
     document.querySelectorAll("[data-pthws-profile]").forEach((btn) => {
       btn.addEventListener("click", () => setPinProfile(btn.dataset.pthwsProfile));
+    });
+
+    document.getElementById("pthws-input-dim-a")?.addEventListener("input", (e) => {
+      if (activeProfile === "square") {
+        const dimB = document.getElementById("pthws-input-dim-b");
+        if (dimB) {
+          dimB.value = e.target.value;
+        }
+      }
     });
 
     [
