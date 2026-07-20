@@ -43,6 +43,9 @@
       <a class="nav-item" data-page="wiring" href="#">
         <span class="nav-icon">W</span> Wiring Option
       </a>
+      <a class="nav-item" href="#" onclick="window.open('pcb_checklist.html', '_blank'); return false;">
+        <span class="nav-icon">🔗</span> PDB Creation Checklist
+      </a>
 
       <div class="nav-section-label">Data</div>
       <a class="nav-item" data-page="history" href="#">
@@ -52,8 +55,8 @@
 
     <div class="sidebar-footer">
       <div style="font-size:0.7rem;color:var(--text-muted);text-align:center;">
-        v1.0 &bull; PCB CalcPro<br/>
-        <span style="font-size:0.65rem;">No backend required</span>
+        V1.0 &bull; PCB CalcPro<br/>
+        <span style="font-size:0.65rem;">All LIB tip here</span>
       </div>
     </div>
   </aside>
@@ -137,6 +140,13 @@
           <div class="quick-action" data-goto="pthpadstack">
             <div class="qa-icon">📐</div>
             <h4>PTH Pad Stack</h4>
+            <a href="pcb_checklist.html" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
+            <div class="quick-action">
+              <div class="qa-icon">🔗</div>
+              <h4>External Dashboard</h4>
+              <p>Click here to open the external dashboard in a new tab.</p>
+            </div>
+          </a>
             <p>IPC-compliant drill, pad, and CAD preview for square and rectangular leads.</p>
           </div>
           <div class="quick-action" data-goto="wiring">
@@ -394,20 +404,24 @@
                 </div>
               </div>
 
-              <div class="form-group">
-                <div class="pthws-range-header">
+              <div class="form-row">
+                <div class="form-group">
                   <label id="pthws-label-dim-a">Square Lead Side (a)</label>
-                  <span id="pthws-val-dim-a" class="pthws-range-value">0.64 mm</span>
+                  <div class="pthws-input-unit">
+                    <input type="number" class="form-control" id="pthws-input-dim-a" value="0.64" step="0.01" min="0.01" />
+                    <span class="pthws-unit-lbl">mm</span>
+                  </div>
+                  <span id="pthws-val-dim-a" style="display:none;">0.64 mm</span>
                 </div>
-                <input type="range" id="pthws-input-dim-a" min="0.1" max="4.0" step="0.01" value="0.64" class="pthws-range" />
-              </div>
 
-              <div class="form-group" id="pthws-container-dim-b" style="display:none;">
-                <div class="pthws-range-header">
+                <div class="form-group" id="pthws-container-dim-b" style="display:none;">
                   <label>Lead Thickness (b)</label>
-                  <span id="pthws-val-dim-b" class="pthws-range-value">0.50 mm</span>
+                  <div class="pthws-input-unit">
+                    <input type="number" class="form-control" id="pthws-input-dim-b" value="0.50" step="0.01" min="0.01" />
+                    <span class="pthws-unit-lbl">mm</span>
+                  </div>
+                  <span id="pthws-val-dim-b" style="display:none;">0.50 mm</span>
                 </div>
-                <input type="range" id="pthws-input-dim-b" min="0.1" max="4.0" step="0.01" value="0.50" class="pthws-range" />
               </div>
 
               <div class="form-group">
@@ -541,7 +555,7 @@
               </div>
             </div>
 
-            <div class="card mb-24">
+            <!--<div class="card mb-24">
               <div class="card-header">
                 <h3><span class="card-icon">✅</span> Through-Hole Compliance Rules (DRC)</h3>
               </div>
@@ -565,7 +579,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
 
@@ -790,3 +804,4 @@
 <script src="pth_pad_stack_workstation.js"></script>
 </body>
 </html>
+  
