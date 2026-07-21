@@ -740,9 +740,27 @@ const MIL_TO_MM = 0.0254;
 
 let componentIdCounter = 0;
 
+// Safe Toast fallback (prevents code crashes if showToast isn't defined)
+function safeToast(msg, type) {
+  if (typeof showToast === "function") {
+    showToast(msg, type);
+  } else {
+    alert(msg);
+  }
+}
+
+// Safe History fallback
+function safeSaveHistory(data) {
+  if (typeof saveHistory === "function") {
+    saveHistory(data);
+  }
+}
+
 function addComponentEntry() {
   componentIdCounter++;
   const container = document.getElementById("componentEntries");
+  if (!container) return;
+
   const entry = document.createElement("div");
   entry.className = "component-entry";
   entry.id = `comp-${componentIdCounter}`;
@@ -764,30 +782,24 @@ function addComponentEntry() {
   container.appendChild(entry);
 }
 
-// Add initial entry
-addComponentEntry();
-
-document.getElementById("addComponentBtn").addEventListener("click", addComponentEntry);
-
-document.getElementById("calcTHBtn").addEventListener("click", calculateThroughHole);
-
 function calculateThroughHole() {
-  const unit = document.getElementById("thUnit").value; // "mm" or "mil"
+  const unitElem = document.getElementById("thUnit");
+  if (!unitElem) return;
+
+  const unit = unitElem.value;
   const entries = document.querySelectorAll(".component-entry");
 
-  // Read optional plating allowance (in mil). Default to 0 if empty.
-  const platingRaw = parseFloat(document.getElementById("thPlating").value);
+  const platingRaw = parseFloat(document.getElementById("thPlating")?.value);
   const platingMil = (!isNaN(platingRaw) && platingRaw >= 0) ? platingRaw : 0;
 
   if (entries.length === 0) {
-    showToast("Add at least one component.", "error");
+    safeToast("Add at least one component.", "error");
     return;
   }
 
   const results = [];
   const stepsLines = [];
 
-  // Show plating context once at top
   stepsLines.push(
     `<span class="step-label">Plating Allowance:</span> ${platingMil.toFixed(2)} mil per side` +
     (platingMil === 0 ? ' <span style="color:var(--text-muted);">(not specified — Drill = Finished Hole)</span>' : ''),
@@ -795,32 +807,28 @@ function calculateThroughHole() {
   );
 
   entries.forEach((entry, idx) => {
-    const ref = entry.querySelector('[data-field="ref"]').value || `Comp${idx + 1}`;
-    const pinRaw = parseFloat(entry.querySelector('[data-field="pin"]').value);
+    const refInput = entry.querySelector('[data-field="ref"]');
+    const pinInput = entry.querySelector('[data-field="pin"]');
+
+    const ref = (refInput && refInput.value.trim()) ? refInput.value.trim() : `Comp${idx + 1}`;
+    const pinRaw = parseFloat(pinInput ? pinInput.value : '');
+
+    // Skip empty or zero/negative pin inputs
     if (isNaN(pinRaw) || pinRaw <= 0) return;
 
-    // Convert pin diameter to mil for calculations
     const pinMil = unit === "mm" ? pinRaw * MM_TO_MIL : pinRaw;
-
-    // Company Standard:  Finished Hole = Pin Diameter + 8 mil
     const finishedHoleMil = pinMil + 8;
-
-    // Drill Size = Finished Hole + 2 × Plating Allowance
-    // (plating is deposited on both walls, so total reduction = 2 × allowance)
-    const drillMil = finishedHoleMil + 2 * platingMil;
+    const drillMil = finishedHoleMil + (2 * platingMil);
     const roundedDrillMil = Math.ceil(drillMil);
     const recommendedFinishedDrillMil = roundedDrillMil % 2 === 0 ? roundedDrillMil : roundedDrillMil + 1;
     const recommendedPadMil = recommendedFinishedDrillMil + 20;
+    const clearanceMil = finishedHoleMil - pinMil;
 
-    // Hole-to-Pin Clearance = Finished Hole − Pin Diameter
-    const clearanceMil = finishedHoleMil - pinMil; // always 8 mil by definition
-
-    // Build result object with both display units.
     const toMilDisplay = (valMil) => valMil.toFixed(2);
     const toMmDisplay = (valMil) => (valMil * MIL_TO_MM).toFixed(4);
     const toDualDisplay = (valMil) => `${toMmDisplay(valMil)} mm / ${toMilDisplay(valMil)} mil`;
 
-    const row = {
+    results.push({
       ref,
       pin: toDualDisplay(pinMil),
       finishedHole: toDualDisplay(finishedHoleMil),
@@ -829,8 +837,7 @@ function calculateThroughHole() {
       recommendedPad: toDualDisplay(recommendedPadMil),
       clearance: toDualDisplay(clearanceMil),
       unit: "mm / mil",
-    };
-    results.push(row);
+    });
 
     stepsLines.push(
       `<span class="step-label">─── ${ref} ───</span>`,
@@ -839,7 +846,7 @@ function calculateThroughHole() {
       `<span class="step-result">Finished Hole = ${pinMil.toFixed(2)} + 8 = ${finishedHoleMil.toFixed(2)} mil → ${toDualDisplay(finishedHoleMil)}</span>`,
       `<span class="step-formula">Drill Size = Finished Hole + 2 × Plating Allowance</span>`,
       `<span class="step-result">Drill = ${finishedHoleMil.toFixed(2)} + 2 × ${platingMil.toFixed(2)} = ${drillMil.toFixed(2)} mil → ${toDualDisplay(drillMil)}</span>`,
-      `<span class="step-formula">Recommended Finished Drill Size = Calculated Drill Size rounded up to the next even mil size</span>`,
+      `<span class="step-formula">Recommended Finished Drill Size = Calculated Drill Size rounded up to next even mil</span>`,
       `<span class="step-result">Recommended Finished Drill = ${drillMil.toFixed(2)} mil → ${recommendedFinishedDrillMil.toFixed(2)} mil → ${toDualDisplay(recommendedFinishedDrillMil)}</span>`,
       `<span class="step-formula">Recommended Pad Size = Recommended Finished Drill Size + 20 mil</span>`,
       `<span class="step-result">Recommended Pad = ${recommendedFinishedDrillMil.toFixed(2)} + 20 = ${recommendedPadMil.toFixed(2)} mil → ${toDualDisplay(recommendedPadMil)}</span>`,
@@ -850,48 +857,66 @@ function calculateThroughHole() {
   });
 
   if (results.length === 0) {
-    showToast("Please enter valid pin diameters.", "error");
+    safeToast("Please enter a valid Pin Diameter (greater than 0).", "error");
     return;
   }
 
-  // Render table
+  // Render Table
   const tbody = document.getElementById("thResultBody");
-  tbody.innerHTML = results
-    .map(
-      (r) => `
-    <tr>
-      <td>${r.ref}</td>
-      <td>${r.pin}</td>
-      <td>${r.drill}</td>
-      <td>${r.recommendedFinishedDrill}</td>
-      <td>${r.recommendedPad}</td>
-      <td>${r.clearance}</td>
-      <td>${r.unit}</td>
-    </tr>`
-    )
-    .join("");
+  if (tbody) {
+    tbody.innerHTML = results
+      .map(
+        (r) => `
+      <tr>
+        <td>${r.ref}</td>
+        <td>${r.pin}</td>
+        <td>${r.drill}</td>
+        <td>${r.recommendedFinishedDrill}</td>
+        <td>${r.recommendedPad}</td>
+        <td>${r.clearance}</td>
+        <td>${r.unit}</td>
+      </tr>`
+      )
+      .join("");
+  }
 
-  // Render steps
-  document.getElementById("thCalcSteps").innerHTML = stepsLines.join("<br/>");
+  // Render Calculation Steps
+  const stepsElem = document.getElementById("thCalcSteps");
+  if (stepsElem) {
+    stepsElem.innerHTML = stepsLines.join("<br/>");
+  }
 
-  // Save to history
-  saveHistory({
+  safeSaveHistory({
     type: "Through-Hole",
     data: results,
   });
 
-  showToast(`Calculated ${results.length} component(s)!`, "success");
+  safeToast(`Calculated ${results.length} component(s)!`, "success");
 }
 
-// Copy through-hole results
-document.getElementById("copyTHResults").addEventListener("click", () => {
-  const rows = document.querySelectorAll("#thResultBody tr");
-  let text = "Ref\tLead Diameter\tCalculated Drill Size\tRecommended Finished Drill Size\tRecommended Pad Size\tHole-to-Pin Clearance\tUnit\n";
-  rows.forEach((tr) => {
-    const cells = Array.from(tr.cells).map((c) => c.textContent.trim());
-    text += cells.join("\t") + "\n";
-  });
-  navigator.clipboard.writeText(text).then(() => showToast("Table copied!", "success"));
+// Bind event listeners only after DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  // Add first row on load
+  addComponentEntry();
+
+  const addBtn = document.getElementById("addComponentBtn");
+  if (addBtn) addBtn.addEventListener("click", addComponentEntry);
+
+  const calcBtn = document.getElementById("calcTHBtn");
+  if (calcBtn) calcBtn.addEventListener("click", calculateThroughHole);
+
+  const copyBtn = document.getElementById("copyTHResults");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", () => {
+      const rows = document.querySelectorAll("#thResultBody tr");
+      let text = "Ref\tLead Diameter\tCalculated Drill Size\tRecommended Finished Drill Size\tRecommended Pad Size\tHole-to-Pin Clearance\tUnit\n";
+      rows.forEach((tr) => {
+        const cells = Array.from(tr.cells).map((c) => c.textContent.trim());
+        text += cells.join("\t") + "\n";
+      });
+      navigator.clipboard.writeText(text).then(() => safeToast("Table copied!", "success"));
+    });
+  }
 });
 
 
