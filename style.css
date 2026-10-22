@@ -257,6 +257,9 @@ input, select, textarea { font-family: inherit; }
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  /* Prevent the main area from expanding beyond the viewport width */
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 /* ---------- Top Header ---------- */
@@ -330,12 +333,19 @@ input, select, textarea { font-family: inherit; }
 .content-area {
   flex: 1;
   padding: 28px;
+  /* Prevent any module from blowing out the horizontal axis */
+  overflow-x: hidden;
+  /* Bound width so content never exceeds the viewport minus sidebar */
+  min-width: 0;
 }
 
 /* Module containers */
 .module-page {
   display: none;
   animation: fadeSlideIn 0.4s ease forwards;
+  /* Each page is bounded to the available content width */
+  width: 100%;
+  min-width: 0;
 }
 .module-page.active { display: block; }
 
@@ -352,7 +362,10 @@ input, select, textarea { font-family: inherit; }
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow-md);
   transition: all var(--transition-med);
-  overflow: hidden;
+  /* overflow:clip preserves border-radius cosmetics without creating a scroll container,
+     so table-wrapper horizontal scrollbars inside this card remain functional */
+  overflow: clip;
+  min-width: 0; /* prevent flex/grid blowout */
 }
 
 .card:hover {
@@ -745,8 +758,12 @@ select.form-control {
 
 .table-wrapper {
   overflow-x: auto;
+  /* overflow-y must remain visible/auto so sticky thead works */
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
+  /* Ensure the wrapper never expands wider than its containing card */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* ============================================================

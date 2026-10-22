@@ -6,6 +6,7 @@
   <meta name="description" content="PCB Manufacturing Calculator Dashboard — Stencil Aperture, Through-Hole Pad & Drill, and Engineering Unit Converter for PCB engineers." />
   <title>PCB Manufacturing Calculator Dashboard</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="bga_land_calculator.css" />
 </head>
 <body>
 
@@ -21,6 +22,10 @@
       <div class="sidebar-title"><span>PCB</span> CalcPro</div>
     </div>
 
+    <div class="dp-logo-container" style="text-align: center; padding: 16px 20px; cursor: pointer; border-bottom: 1px solid var(--border-color); margin-bottom: 16px;" onclick="navigateTo('dashboard')">
+      <div style="font-weight: 800; font-size: 1.1rem; color: var(--accent-indigo); letter-spacing: 1px; text-transform: uppercase;">Data Patterns</div>
+    </div>
+
     <nav class="sidebar-nav">
       <div class="nav-section-label">Overview</div>
       <a class="nav-item active" data-page="dashboard" href="#">
@@ -28,8 +33,11 @@
       </a>
 
       <div class="nav-section-label">Calculators</div>
-      <a class="nav-item" data-page="stencil" href="#">
-        <span class="nav-icon">🔲</span> Stencil Aperture
+      <a class="nav-item" href="#" onclick="window.open('pcb_checklist.html', '_blank'); return false;">
+        <span class="nav-icon">🔗</span> PDB Creation Checklist
+      </a>
+      <a class="nav-item" data-page="converter" href="#">
+        <span class="nav-icon">🔄</span> Unit Converter
       </a>
       <a class="nav-item" data-page="throughhole" href="#">
         <span class="nav-icon">🕳️</span> Through-Hole Pad
@@ -37,14 +45,14 @@
       <a class="nav-item" data-page="pthpadstack" href="#">
         <span class="nav-icon">📐</span> PTH Pad Stack
       </a>
-      <a class="nav-item" data-page="converter" href="#">
-        <span class="nav-icon">🔄</span> Unit Converter
-      </a>
       <a class="nav-item" data-page="wiring" href="#">
         <span class="nav-icon">W</span> Wiring Option
       </a>
-      <a class="nav-item" href="#" onclick="window.open('pcb_checklist.html', '_blank'); return false;">
-        <span class="nav-icon">🔗</span> PDB Creation Checklist
+      <a class="nav-item" data-page="stencil" href="#">
+        <span class="nav-icon">🔲</span> Stencil Aperture
+      </a>
+      <a class="nav-item" data-page="bgaland" href="#">
+        <span class="nav-icon">⚪</span> BGA Land Pattern
       </a>
 
       <div class="nav-section-label">Data</div>
@@ -122,37 +130,40 @@
         <!-- Quick actions -->
         <h2 class="section-heading">⚡ Quick Actions</h2>
         <div class="grid-3 mb-24">
-          <div class="quick-action" data-goto="stencil">
-            <div class="qa-icon">🔲</div>
-            <h4>Stencil Aperture</h4>
-            <p>Calculate area ratios and validate stencil designs for SMT pads.</p>
-          </div>
-          <div class="quick-action" data-goto="throughhole">
-            <div class="qa-icon">🕳️</div>
-            <h4>Through-Hole Pad</h4>
-            <p>Compute drill sizes, pad diameters, and annular rings.</p>
+          <div class="quick-action" onclick="window.open('pcb_checklist.html', '_blank');">
+            <div class="qa-icon">🔗</div>
+            <h4>PDB Creation Checklist</h4>
+            <p>Open the external PCB creation checklist dashboard.</p>
           </div>
           <div class="quick-action" data-goto="converter">
             <div class="qa-icon">🔄</div>
             <h4>Unit Converter</h4>
             <p>Convert between mm, mil, and inch instantly.</p>
           </div>
+          <div class="quick-action" data-goto="throughhole">
+            <div class="qa-icon">🕳️</div>
+            <h4>Through-Hole Pad</h4>
+            <p>Compute drill sizes, pad diameters, and annular rings.</p>
+          </div>
           <div class="quick-action" data-goto="pthpadstack">
             <div class="qa-icon">📐</div>
             <h4>PTH Pad Stack</h4>
-            <a href="pcb_checklist.html" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="quick-action">
-              <div class="qa-icon">🔗</div>
-              <h4>External Dashboard</h4>
-              <p>Click here to open the external dashboard in a new tab.</p>
-            </div>
-          </a>
             <p>IPC-compliant drill, pad, and CAD preview for square and rectangular leads.</p>
           </div>
           <div class="quick-action" data-goto="wiring">
             <div class="qa-icon">W</div>
             <h4>Wiring Option</h4>
             <p>Recommend equipment wire, PCB drill, and solder pad sizes for converter pins.</p>
+          </div>
+          <div class="quick-action" data-goto="stencil">
+            <div class="qa-icon">🔲</div>
+            <h4>Stencil Aperture</h4>
+            <p>Calculate area ratios and validate stencil designs for SMT pads.</p>
+          </div>
+          <div class="quick-action" data-goto="bgaland">
+            <div class="qa-icon">⚪</div>
+            <h4>BGA Land Pattern</h4>
+            <p>IPC-7351B compliant BGA land pattern sizing, tolerance analysis, and CAD preview.</p>
           </div>
         </div>
 
@@ -180,8 +191,8 @@
             <div class="card-header">
               <h3><span class="card-icon">⚙️</span> Stencil Parameters</h3>
               <div class="btn-group">
-                <button type="button" class="btn btn-secondary btn-sm pthws-unit-btn active" id="pthws-unit-mm" data-unit="mm">MM</button>
-                <button type="button" class="btn btn-secondary btn-sm pthws-unit-btn" id="pthws-unit-mil" data-unit="mil">MIL</button>
+                <button type="button" class="btn btn-secondary btn-sm stencil-unit-btn active" id="stencil-unit-mm" data-unit="mm">MM</button>
+                <button type="button" class="btn btn-secondary btn-sm stencil-unit-btn" id="stencil-unit-mil" data-unit="mil">MIL</button>
               </div>
             </div>
             <div class="card-body">
@@ -210,11 +221,11 @@
                 <div id="rectDims">
                   <div class="form-row">
                     <div class="form-group">
-                      <label>Length (mm)</label>
+                      <label>Length (<span class="stencil-unit-lbl">mm</span>)</label>
                       <input type="number" class="form-control" id="rectLength" placeholder="e.g. 1.2" step="0.01" min="0" />
                     </div>
                     <div class="form-group">
-                      <label>Width (mm)</label>
+                      <label>Width (<span class="stencil-unit-lbl">mm</span>)</label>
                       <input type="number" class="form-control" id="rectWidth" placeholder="e.g. 0.6" step="0.01" min="0" />
                     </div>
                   </div>
@@ -223,7 +234,7 @@
                 <!-- Circle dims -->
                 <div id="circleDims" style="display:none;">
                   <div class="form-group">
-                    <label>Diameter (mm)</label>
+                    <label>Diameter (<span class="stencil-unit-lbl">mm</span>)</label>
                     <input type="number" class="form-control" id="circleDiameter" placeholder="e.g. 0.8" step="0.01" min="0" />
                   </div>
                 </div>
@@ -231,7 +242,7 @@
                 <!-- Corner Radius for rounded rect -->
                 <div id="cornerDims" style="display:none;">
                   <div class="form-group">
-                    <label>Corner Radius (mm)</label>
+                    <label>Corner Radius (<span class="stencil-unit-lbl">mm</span>)</label>
                     <input type="number" class="form-control" id="cornerRadius" placeholder="e.g. 0.15" step="0.01" min="0" />
                   </div>
                 </div>
@@ -240,11 +251,11 @@
               <!-- Polygon Dimensions -->
               <div class="polygon-dimensions" id="polyDimensions">
                 <div class="form-group">
-                  <label>Vertex Coordinates (mm)</label>
+                  <label>Vertex Coordinates (<span class="stencil-unit-lbl">mm</span>)</label>
                   <div class="table-wrapper" style="max-height:220px;overflow-y:auto;">
                     <table class="coord-table" id="coordTable">
                       <thead>
-                        <tr><th>#</th><th>X (mm)</th><th>Y (mm)</th><th></th></tr>
+                        <tr><th>#</th><th>X (<span class="stencil-unit-lbl">mm</span>)</th><th>Y (<span class="stencil-unit-lbl">mm</span>)</th><th></th></tr>
                       </thead>
                       <tbody id="coordBody"></tbody>
                     </table>
@@ -255,7 +266,7 @@
 
               <!-- Stencil Thickness -->
               <div class="form-group">
-                <label>Stencil Thickness (mm)</label>
+                <label>Stencil Thickness (<span class="stencil-unit-lbl">mm</span>)</label>
                 <input type="number" class="form-control" id="stencilThickness" placeholder="e.g. 0.12" step="0.01" min="0" />
               </div>
 
@@ -291,17 +302,17 @@
               <div class="stat-card">
                 <div class="stat-label">Area Opening</div>
                 <div class="stat-value" id="resAreaOpening">—</div>
-                <div class="stat-unit">mm²</div>
+                <div class="stat-unit">sq <span class="stencil-unit-lbl">mm</span></div>
               </div>
               <div class="stat-card">
                 <div class="stat-label">Perimeter</div>
                 <div class="stat-value" id="resPerimeter">—</div>
-                <div class="stat-unit">mm</div>
+                <div class="stat-unit"><span class="stencil-unit-lbl">mm</span></div>
               </div>
               <div class="stat-card">
                 <div class="stat-label">Area Wall</div>
                 <div class="stat-value" id="resAreaWall">—</div>
-                <div class="stat-unit">mm²</div>
+                <div class="stat-unit">sq <span class="stencil-unit-lbl">mm</span></div>
               </div>
               <div class="stat-card">
                 <div class="stat-label">Area Ratio</div>
@@ -559,7 +570,7 @@
               </div>
             </div>
 
-            <div class="card mb-24">
+            <!--<div class="card mb-24">
               <div class="card-header">
                 <h3><span class="card-icon">✅</span> Through-Hole Compliance Rules (DRC)</h3>
               </div>
@@ -583,7 +594,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
 
@@ -771,6 +782,371 @@
         </div>
       </div>
 
+      <!-- ======== PAGE: BGA Land Pattern Calculator ======== -->
+      <div class="module-page" id="page-bgaland">
+        <div class="bga-layout mb-24">
+          <!-- Left: Inputs -->
+          <div class="card bga-inputs">
+            <div class="card-header">
+              <h3><span class="card-icon">⚪</span> BGA Parameters (IPC-7351B)</h3>
+              <div class="btn-group">
+                <button type="button" class="btn btn-secondary btn-sm active" id="bga-unit-mm" data-unit="mm">MM</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="bga-unit-mil" data-unit="mil">MIL</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Preset Selector -->
+              <div class="form-group">
+                <label>Standard BGA Presets</label>
+                <select class="form-control" id="bga-preset-select">
+                  <option value="bga-100" selected>BGA 1.00mm (Pitch 1.00mm, Ball 0.60mm)</option>
+                  <option value="bga-127">BGA 1.27mm (Pitch 1.27mm, Ball 0.75mm)</option>
+                  <option value="fbga-080">FBGA 0.80mm (Pitch 0.80mm, Ball 0.50mm)</option>
+                  <option value="fbga-080-ddr">FBGA 0.80mm DDR3/4 (Pitch 0.80mm, Ball 0.45mm)</option>
+                  <option value="fbga-065">FBGA 0.65mm (Pitch 0.65mm, Ball 0.40mm)</option>
+                  <option value="fbga-050">FBGA 0.50mm (Pitch 0.50mm, Ball 0.30mm)</option>
+                  <option value="wlcsp-040">WLCSP 0.40mm (Pitch 0.40mm, Ball 0.25mm)</option>
+                  <option value="wlcsp-035">WLCSP 0.35mm (Pitch 0.35mm, Ball 0.20mm)</option>
+                  <option value="custom">Custom Configuration</option>
+                </select>
+              </div>
+
+              <!-- Package / Component Name -->
+              <div class="form-group">
+                <label>Component / Package Reference</label>
+                <input type="text" class="form-control" id="bga-pkg-name" value="BGA-484 (1.00mm)" placeholder="e.g. U1, Xilinx Artix-7, FBGA-256" />
+              </div>
+
+              <!-- Pitch Inputs -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Pitch X (<span class="bga-unit-lbl">mm</span>)</label>
+                  <input type="number" class="form-control" id="bga-pitch-x" value="1.00" step="0.01" min="0.01" />
+                </div>
+                <div class="form-group">
+                  <label>Pitch Y (<span class="bga-unit-lbl">mm</span>)</label>
+                  <input type="number" class="form-control" id="bga-pitch-y" value="1.00" step="0.01" min="0.01" />
+                </div>
+              </div>
+              <div class="form-group mb-16" style="margin-top:-8px;">
+                <label style="font-size:0.75rem;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-weight:normal;color:var(--text-secondary);">
+                  <input type="checkbox" id="bga-square-pitch" checked /> Lock Square Pitch (Px = Py)
+                </label>
+              </div>
+
+              <!-- Ball Geometry -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Nominal Ball Dia (<span class="bga-unit-lbl">mm</span>)</label>
+                  <input type="number" class="form-control" id="bga-ball-nom" value="0.60" step="0.01" min="0.01" />
+                </div>
+                <div class="form-group">
+                  <label>Ball Tol ± (<span class="bga-unit-lbl">mm</span>)</label>
+                  <input type="number" class="form-control" id="bga-ball-tol" value="0.10" step="0.01" min="0" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Min Ball Dia (<span class="bga-unit-lbl">mm</span>)</label>
+                  <input type="number" class="form-control" id="bga-ball-min" value="0.50" step="0.01" min="0.01" />
+                </div>
+                <div class="form-group">
+                  <label>Max Ball Dia (<span class="bga-unit-lbl">mm</span>)</label>
+                  <input type="number" class="form-control" id="bga-ball-max" value="0.70" step="0.01" min="0.01" />
+                </div>
+              </div>
+
+              <!-- Design Objective & Pad Definition -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label>IPC Density Level</label>
+                  <select class="form-control" id="bga-density-level">
+                    <option value="A">Level A - Most (Maximum Land / High Rel)</option>
+                    <option value="B" selected>Level B - Nominal (Standard Production)</option>
+                    <option value="C">Level C - Least (Minimum Land / HDI)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Pad Mask Definition</label>
+                  <select class="form-control" id="bga-pad-type">
+                    <option value="NSMD" selected>NSMD - Non-Solder Mask Defined (Preferred)</option>
+                    <option value="SMD">SMD - Solder Mask Defined</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Metallurgy & Collapsibility -->
+              <div class="form-group">
+                <label>Solder Ball Metallurgy / Behavior</label>
+                <select class="form-control" id="bga-ball-type">
+                  <option value="collapsible" selected>Collapsible Solder Balls (SAC305 / Sn-Pb — Standard PBGA/FBGA)</option>
+                  <option value="non-collapsible">Non-Collapsible Balls (Ceramic CBGA / High-Melt Solder)</option>
+                </select>
+              </div>
+
+              <!-- Manufacturing Tolerances & Rules -->
+              <div class="section-heading mt-24">Manufacturing Tolerances &amp; Design Rules</div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Board Fab Allowance (±<span class="bga-unit-lbl">mm</span>)</label>
+                  <input type="number" class="form-control" id="bga-fab-tol" value="0.05" step="0.005" min="0" />
+                  <span class="bga-field-hint">Etch tolerance (IPC default ±0.05mm / 2mil)</span>
+                </div>
+                <div class="form-group">
+                  <label>Assembly Placement (±<span class="bga-unit-lbl">mm</span>)</label>
+                  <input type="number" class="form-control" id="bga-asm-tol" value="0.05" step="0.005" min="0" />
+                  <span class="bga-field-hint">Pick-and-place accuracy (±0.05mm)</span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Mask Clearance / Expansion (<span class="bga-unit-lbl">mm</span>)</label>
+                  <input type="number" class="form-control" id="bga-mask-clr" value="0.05" step="0.005" min="0" />
+                  <span class="bga-field-hint">Radial mask pullback (0.05mm / 2mil)</span>
+                </div>
+                <div class="form-group">
+                  <label>Escape Trace / Space (<span class="bga-unit-lbl">mm</span>)</label>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                    <input type="number" class="form-control" id="bga-trace-w" value="0.10" step="0.005" min="0.01" title="Trace Width" placeholder="Width" />
+                    <input type="number" class="form-control" id="bga-trace-s" value="0.10" step="0.005" min="0.01" title="Trace Space" placeholder="Space" />
+                  </div>
+                  <span class="bga-field-hint">Target trace width &amp; spacing</span>
+                </div>
+              </div>
+
+              <div class="btn-group mt-20" style="width:100%;">
+                <button type="button" class="btn btn-primary" id="bga-calc-btn" style="flex:1;">⚡ Calculate</button>
+                <button type="button" class="btn btn-secondary" id="bga-save-btn">💾 Save Spec</button>
+                <button type="button" class="btn btn-secondary" id="bga-reset-btn">↺ Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive CAD Visualizer -->
+          <div class="card bga-preview">
+            <div class="card-header">
+              <h3><span class="card-icon">👁️</span> Interactive CAD Pad Visualizer</h3>
+              <div class="bga-layer-toggles">
+                <label><input type="checkbox" id="bga-layer-land" checked /> Land</label>
+                <label><input type="checkbox" id="bga-layer-ball" checked /> Ball</label>
+                <label><input type="checkbox" id="bga-layer-mask" checked /> Mask</label>
+                <label><input type="checkbox" id="bga-layer-dim" checked /> Dims</label>
+                <label><input type="checkbox" id="bga-layer-array" checked /> 3×3 Grid</label>
+                <label><input type="checkbox" id="bga-layer-route" checked /> Escape</label>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="bga-cad-wrap">
+                <svg id="bga-cad-svg" viewBox="0 0 440 440" class="bga-cad-svg">
+                  <!-- Dynamically rendered by bga_land_calculator.js -->
+                </svg>
+                <div class="bga-cad-legend">
+                  <span class="bga-legend-item"><span class="bga-legend-dot green"></span> Copper Land (D_land)</span>
+                  <span class="bga-legend-item"><span class="bga-legend-dot cyan"></span> Solder Ball (b_nom)</span>
+                  <span class="bga-legend-item"><span class="bga-legend-dot purple"></span> Mask Opening (D_mask)</span>
+                  <span class="bga-legend-item"><span class="bga-legend-dot amber"></span> Escape Route</span>
+                  <span class="bga-legend-item"><span class="bga-legend-dot rose"></span> Dimensions</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="card mb-24">
+          <div class="card-header">
+            <h3><span class="card-icon">📐</span> IPC-7351B Calculation Results</h3>
+            <div class="btn-group">
+              <button type="button" class="btn btn-secondary btn-sm" id="bga-copy-summary-btn">📋 Copy</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="bga-export-csv-btn">📄 CSV</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="bga-print-btn">🖨️ Print</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Safety DRC Alert Box -->
+            <div class="bga-alert success" id="bga-alert-box">
+              <div class="bga-alert-icon">✅</div>
+              <div>IPC-7351B Land Pattern Calculations Loaded.</div>
+            </div>
+
+            <!-- Stat Cards Grid -->
+            <div class="grid-4 mb-24">
+              <div class="stat-card">
+                <div class="stat-label">Recommended Land Dia (Nom)</div>
+                <div class="stat-value" id="bga-metric-land" style="color:var(--accent-green);font-size:1.45rem;">—</div>
+                <div class="stat-unit">target finished pad</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">MMC Land Dia (Max)</div>
+                <div class="stat-value" id="bga-metric-mmc">—</div>
+                <div class="stat-unit">upper fab boundary</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">LMC Land Dia (Min)</div>
+                <div class="stat-value" id="bga-metric-lmc">—</div>
+                <div class="stat-unit">lower fab boundary</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Solder Mask Opening</div>
+                <div class="stat-value" id="bga-metric-mask">—</div>
+                <div class="stat-unit">aperture diameter</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Solder Mask Dam</div>
+                <div class="stat-value" id="bga-metric-dam">—</div>
+                <div class="stat-unit">min web between pads</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Pad-to-Pad Clearance</div>
+                <div class="stat-value" id="bga-metric-clearance">—</div>
+                <div class="stat-unit">copper spacing</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Routing Channel Width</div>
+                <div class="stat-value" id="bga-metric-channel">—</div>
+                <div class="stat-unit">between adjacent pads</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Escape Capability</div>
+                <div class="stat-value" id="bga-metric-routability" style="font-size:1.1rem;">—</div>
+                <div class="stat-unit">escape traces supported</div>
+              </div>
+            </div>
+
+            <!-- Detailed Steps / Formulas -->
+            <div class="section-heading mb-16">📝 Live IPC-7351B Calculation Breakdown &amp; Traceability</div>
+            <div class="grid-2 mb-16">
+              <div class="bga-formula-box">
+                <div class="bga-formula-title">1. Target Land Sizing (IPC-7351B Section 8)</div>
+                <div class="bga-formula-eq" id="bga-step1-eq">D_land = b_nom × (1 - Reduction)</div>
+                <div class="bga-formula-val green" id="bga-step1-val">—</div>
+              </div>
+              <div class="bga-formula-box">
+                <div class="bga-formula-title">2. Manufacturing Tolerance Stackup</div>
+                <div class="bga-formula-eq" id="bga-step2-eq">D_max = D_land + F_tol | D_min = D_land - F_tol</div>
+                <div class="bga-formula-val amber" id="bga-step2-val">—</div>
+              </div>
+              <div class="bga-formula-box">
+                <div class="bga-formula-title">3. Solder Mask &amp; Mask Dam (NSMD vs SMD)</div>
+                <div class="bga-formula-eq" id="bga-step3-eq">D_mask = D_land + 2×M_clr | W_dam = Pitch - D_mask</div>
+                <div class="bga-formula-val cyan" id="bga-step3-val">—</div>
+              </div>
+              <div class="bga-formula-box">
+                <div class="bga-formula-title">4. Channel Routability &amp; Escape Traces</div>
+                <div class="bga-formula-eq" id="bga-step4-eq">W_ch = Pitch - D_copper | Traces = ⌊(W_ch - S_tr)/(W_tr + S_tr)⌋</div>
+                <div class="bga-formula-val" id="bga-step4-val">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standards Reference Matrix Card -->
+        <div class="card mb-24">
+          <div class="card-header">
+            <h3><span class="card-icon">📚</span> IPC-7351B Standard Reference Table (Table 8-1)</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-wrapper mb-16">
+              <table class="bga-ref-table">
+                <thead>
+                  <tr>
+                    <th>Nominal Ball Dia (mm)</th>
+                    <th>Typical Pitch (mm)</th>
+                    <th>Level A Land (Most)</th>
+                    <th>Level B Land (Nominal)</th>
+                    <th>Level C Land (Least)</th>
+                    <th>Nominal Reduction (%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-ball="0.75"><td>0.75 mm (30 mil)</td><td>1.27 / 1.50 mm</td><td>0.65 mm</td><td>0.60 mm</td><td>0.55 mm</td><td>20.0%</td></tr>
+                  <tr data-ball="0.60" class="active-row"><td>0.60 mm (24 mil)</td><td>1.00 mm</td><td>0.55 mm</td><td>0.50 mm</td><td>0.45 mm</td><td>16.7%</td></tr>
+                  <tr data-ball="0.50"><td>0.50 mm (20 mil)</td><td>0.80 mm</td><td>0.45 mm</td><td>0.40 mm</td><td>0.35 mm</td><td>20.0%</td></tr>
+                  <tr data-ball="0.45"><td>0.45 mm (18 mil)</td><td>0.80 mm (DDR)</td><td>0.40 mm</td><td>0.35 mm</td><td>0.30 mm</td><td>22.2%</td></tr>
+                  <tr data-ball="0.40"><td>0.40 mm (16 mil)</td><td>0.65 mm</td><td>0.35 mm</td><td>0.30 mm</td><td>0.25 mm</td><td>25.0%</td></tr>
+                  <tr data-ball="0.35"><td>0.35 mm (14 mil)</td><td>0.65 / 0.50 mm</td><td>0.30 mm</td><td>0.28 mm</td><td>0.25 mm</td><td>20.0%</td></tr>
+                  <tr data-ball="0.30"><td>0.30 mm (12 mil)</td><td>0.50 mm</td><td>0.28 mm</td><td>0.25 mm</td><td>0.20 mm</td><td>16.7%</td></tr>
+                  <tr data-ball="0.25"><td>0.25 mm (10 mil)</td><td>0.40 mm</td><td>0.23 mm</td><td>0.20 mm</td><td>0.17 mm</td><td>20.0%</td></tr>
+                  <tr data-ball="0.20"><td>0.20 mm (8 mil)</td><td>0.35 mm</td><td>0.19 mm</td><td>0.17 mm</td><td>0.15 mm</td><td>15.0%</td></tr>
+                  <tr data-ball="0.15"><td>0.15 mm (6 mil)</td><td>0.30 / 0.25 mm</td><td>0.15 mm</td><td>0.13 mm</td><td>0.12 mm</td><td>13.3%</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="calc-steps">
+              <span class="step-label">Engineering Guidelines:</span>
+              <strong>NSMD (Non-Solder Mask Defined)</strong> is recommended by IPC-7351B and major silicon vendors because copper etching yields tighter dimensional tolerance than solder mask registration, and solder wets the sides of the copper pad to provide strong mechanical joint anchoring and self-centering during reflow.
+              <strong>SMD (Solder Mask Defined)</strong> pads are used when routing channels are severely constrained, for high-stress package corners, or for non-collapsible ceramic balls (CBGA).
+            </div>
+          </div>
+        </div>
+
+        <!-- Saved BGA Footprint Library Card -->
+        <div class="card mb-24">
+          <div class="card-header">
+            <h3><span class="card-icon">💾</span> Saved BGA Footprint Specifications</h3>
+            <button type="button" class="btn btn-danger btn-sm" id="bga-clear-specs-btn">🗑️ Clear All</button>
+          </div>
+          <div class="card-body">
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Ref ID</th>
+                    <th>Package / Ref</th>
+                    <th>Pitch (Px × Py)</th>
+                    <th>Ball Dia</th>
+                    <th>Land Dia (Nom)</th>
+                    <th>Mask Opening</th>
+                    <th>Density</th>
+                    <th>Pad Type</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="bga-saved-specs-body">
+                  <tr><td colspan="9" style="text-align:center;color:var(--text-muted);padding:32px;">No saved BGA footprint specifications yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Printable Datasheet (Hidden on screen) -->
+        <div class="bga-print-report" id="bga-print-report">
+          <h1>BGA Land Pattern Engineering Datasheet</h1>
+          <p class="bga-print-meta">IPC-7351B Generic Requirements for Surface Mount Design &amp; Land Pattern Standard</p>
+          <div class="bga-print-grid">
+            <div>
+              <p><strong>Package Name:</strong> <span id="bga-print-pkg">—</span></p>
+              <p><strong>Ball Pitch (Px × Py):</strong> <span id="bga-print-pitch">—</span></p>
+              <p><strong>Nominal Ball Diameter:</strong> <span id="bga-print-ball">—</span></p>
+              <p><strong>IPC Density Tier:</strong> <span id="bga-print-density">—</span></p>
+            </div>
+            <div>
+              <p><strong>Pad Mask Definition:</strong> <span id="bga-print-padtype">—</span></p>
+              <p><strong>Solder Ball Metallurgy:</strong> <span id="bga-print-balltype">—</span></p>
+              <p><strong>Fabrication Allowance:</strong> <span id="bga-print-fabtol">—</span></p>
+              <p><strong>Assembly Placement:</strong> <span id="bga-print-asmtol">—</span></p>
+            </div>
+          </div>
+          <table class="bga-print-table">
+            <thead>
+              <tr><th>Calculation Parameter</th><th>Target Output Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Recommended PCB Land Diameter (Nominal)</td><td id="bga-print-land">—</td></tr>
+              <tr><td>Maximum Material Condition Land (MMC)</td><td id="bga-print-mmc">—</td></tr>
+              <tr><td>Least Material Condition Land (LMC)</td><td id="bga-print-lmc">—</td></tr>
+              <tr><td>Solder Mask Opening Diameter</td><td id="bga-print-mask">—</td></tr>
+              <tr><td>Solder Mask Dam Width</td><td id="bga-print-dam">—</td></tr>
+              <tr><td>Pad-to-Pad Copper Clearance</td><td id="bga-print-clearance">—</td></tr>
+              <tr><td>Minimum Routing Channel Width</td><td id="bga-print-channel">—</td></tr>
+              <tr><td>Escape Routing Capability</td><td id="bga-print-routability">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- ======== PAGE: History ======== -->
       <div class="module-page" id="page-history">
         <div class="card">
@@ -806,6 +1182,6 @@
 
 <script src="script.js"></script>
 <script src="pth_pad_stack_workstation.js"></script>
+<script src="bga_land_calculator.js"></script>
 </body>
 </html>
-  

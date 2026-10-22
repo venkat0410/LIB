@@ -222,8 +222,84 @@
         }
 
         .checklist-item.checked .checklist-text {
-            color: #166534;
-            text-decoration: line-through;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .engineer-section {
+            margin-top: 24px;
+            padding: 20px 24px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.06), rgba(14, 165, 233, 0.05));
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .engineer-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .engineer-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .engineer-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .engineer-input {
+            width: min(100%, 360px);
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--panel-bg);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .engineer-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .engineer-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 16px;
+        }
+
+        .print-btn {
+            border: none;
+            background: linear-gradient(135deg, var(--accent-blue), #1d4ed8);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+        }
+
+        .print-btn:hover {
+            filter: brightness(1.03);
+        }
+
+        .engineer-error {
+            min-height: 1rem;
+            font-size: 0.85rem;
+            color: #dc2626;
+        }
+
+        .print-meta {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
 
         /* Math/Formula Callout Block */
@@ -325,6 +401,77 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body {
+                background: white;
+                color: #111827;
+                padding: 16px;
+            }
+
+            header {
+                box-shadow: none;
+                border: 1px solid #e2e8f0;
+                background: linear-gradient(135deg, #1e3a8a, #2563eb) !important;
+            }
+
+            .sidebar,
+            .btn-reset,
+            .nav-item,
+            .progress-box,
+            .engineer-actions,
+            .engineer-error {
+                display: none !important;
+            }
+
+            .dashboard-layout {
+                display: block;
+                grid-template-columns: 1fr;
+            }
+
+            .content-area {
+                gap: 16px;
+            }
+
+            .section-panel {
+                background: #ffffff !important;
+                box-shadow: none;
+                border: 1px solid #e2e8f0;
+                break-inside: avoid-page;
+                page-break-inside: avoid;
+            }
+
+            .checklist-item {
+                background-color: #f8fafc !important;
+                border: 1px solid #e2e8f0 !important;
+                break-inside: avoid-page;
+                page-break-inside: avoid;
+            }
+
+            .checklist-item.checked {
+                background-color: #f0fdf4 !important;
+                border-color: #bbf7d0 !important;
+            }
+
+            .engineer-section {
+                background: #ffffff !important;
+                border: 1px solid #e2e8f0;
+                box-shadow: none;
+                break-inside: avoid-page;
+                page-break-inside: avoid;
+            }
+
+            .engineer-input {
+                background: #ffffff !important;
+                color: #111827 !important;
+                border: 1px solid #64748b !important;
+            }
         }
     </style>
 </head>
@@ -725,6 +872,18 @@
                 </div>
             </div>
 
+            <div class="engineer-section" id="engineer-section">
+                <div class="engineer-section-title">Engineer Name</div>
+                <div class="engineer-field">
+                    <label class="engineer-label" for="engineer-name">Engineer Name</label>
+                    <input type="text" id="engineer-name" class="engineer-input" placeholder="Enter engineer name" />
+                    <div class="engineer-error" id="engineer-name-error" role="alert" aria-live="polite"></div>
+                </div>
+                <div class="engineer-actions">
+                    <button type="button" class="print-btn" id="print-checklist-btn">Print Checklist</button>
+                </div>
+                <div class="print-meta" id="checklist-print-date">Date: —</div>
+            </div>
         </div>
     </div>
 
@@ -739,6 +898,46 @@
 
         // Checklist State Engine
         const checkboxes = document.querySelectorAll('.checklist-group input[type="checkbox"]');
+        const engineerInput = document.getElementById('engineer-name');
+        const engineerError = document.getElementById('engineer-name-error');
+        const printDate = document.getElementById('checklist-print-date');
+        const printButton = document.getElementById('print-checklist-btn');
+
+        function updatePrintDate() {
+            if (!printDate) return;
+            const today = new Date();
+            printDate.textContent = `Date: ${today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+        }
+
+        function validateEngineerName() {
+            if (!engineerInput) return true;
+
+            const name = engineerInput.value.trim();
+            if (!name) {
+                if (engineerError) {
+                    engineerError.textContent = 'Please enter the Engineer Name before printing the checklist.';
+                }
+                engineerInput.focus();
+                engineerInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return false;
+            }
+
+            if (engineerError) {
+                engineerError.textContent = '';
+            }
+            return true;
+        }
+
+        function printChecklist() {
+            if (!validateEngineerName()) {
+                return;
+            }
+
+            updatePrintDate();
+            window.setTimeout(() => {
+                window.print();
+            }, 120);
+        }
         
         function updateProgress() {
             const total = checkboxes.length;
@@ -794,6 +993,18 @@
             cb.addEventListener('change', updateProgress);
         });
 
+        if (printButton) {
+            printButton.addEventListener('click', printChecklist);
+        }
+
+        if (engineerInput) {
+            engineerInput.addEventListener('input', () => {
+                if (engineerError && engineerInput.value.trim()) {
+                    engineerError.textContent = '';
+                }
+            });
+        }
+
         // Track active navigation markers during manual window scrolling
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('.section-panel');
@@ -816,7 +1027,10 @@
         });
 
         // Initialize state engine layout values on start
-        window.onload = loadState;
+        window.onload = () => {
+            loadState();
+            updatePrintDate();
+        };
     </script>
 </body>
 </html>

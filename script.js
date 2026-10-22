@@ -21,6 +21,7 @@ const PAGE_TITLES = {
   pthpadstack: "PTH Pad Stack Engineering Workstation",
   converter: "Engineering Unit Converter",
   wiring: "Wiring Option",
+  bgaland: "BGA Land Pattern Calculator",
   history: "Calculation History",
 };
 
@@ -59,6 +60,11 @@ function navigateTo(pageId) {
   // Refresh PTH pad stack workstation view
   if (pageId === "pthpadstack" && typeof initPthPadStackWorkstation === "function") {
     initPthPadStackWorkstation();
+  }
+
+  // Refresh BGA land pattern calculator view
+  if (pageId === "bgaland" && typeof initBgaLandCalculator === "function") {
+    initBgaLandCalculator();
   }
 }
 
@@ -188,6 +194,52 @@ function clearHistory() {
 // ============================================================
 
 let selectedShape = "rectangle";
+let activeStencilUnit = "mm";
+
+// ----- Unit toggle -----
+document.querySelectorAll(".stencil-unit-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".stencil-unit-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    const newUnit = btn.dataset.unit;
+    if (newUnit !== activeStencilUnit) {
+      activeStencilUnit = newUnit;
+      updateStencilUnit();
+    }
+  });
+});
+
+function updateStencilUnit() {
+  const isMm = activeStencilUnit === "mm";
+  const factor = isMm ? MIL_TO_MM : MM_TO_MIL;
+  
+  // Update labels
+  document.querySelectorAll(".stencil-unit-lbl").forEach((el) => {
+    el.textContent = activeStencilUnit;
+  });
+  
+  // Convert inputs
+  ["rectLength", "rectWidth", "circleDiameter", "cornerRadius", "stencilThickness"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el && el.value) {
+      el.value = (parseFloat(el.value) * factor).toFixed(3).replace(/\.?0+$/, '');
+    }
+  });
+  
+  // Convert Polygon rows
+  document.querySelectorAll("#coordBody tr").forEach((row) => {
+    row.querySelectorAll("input").forEach((inp) => {
+      if (inp.value) {
+        inp.value = (parseFloat(inp.value) * factor).toFixed(3).replace(/\.?0+$/, '');
+      }
+    });
+  });
+  
+  drawAperture();
+  if (document.getElementById("resAreaOpening").textContent !== "—") {
+    calculateStencil();
+  }
+}
 
 // ----- Shape selector buttons -----
 document.querySelectorAll("#shapeSelector .shape-btn").forEach((btn) => {
@@ -327,8 +379,8 @@ function drawAperture() {
         ctx.fill();
         ctx.stroke();
         // Dimension labels
-        drawDimLabel(ctx, `${l} mm`, cx, cy + rh / 2 + 18, dimColor);
-        drawDimLabelVertical(ctx, `${w} mm`, cx - rw / 2 - 18, cy, dimColor);
+        drawDimLabel(ctx, `${l} ${activeStencilUnit}`, cx, cy + rh / 2 + 18, dimColor);
+        drawDimLabelVertical(ctx, `${w} ${activeStencilUnit}`, cx - rw / 2 - 18, cy, dimColor);
       }
       break;
     }
@@ -349,7 +401,7 @@ function drawAperture() {
         ctx.stroke();
         ctx.setLineDash([]);
         ctx.strokeStyle = strokeColor;
-        drawDimLabel(ctx, `⌀${d} mm`, cx, cy - r - 12, dimColor);
+        drawDimLabel(ctx, `⌀${d} ${activeStencilUnit}`, cx, cy - r - 12, dimColor);
       }
       break;
     }
@@ -376,8 +428,8 @@ function drawAperture() {
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
-        drawDimLabel(ctx, `${l} mm`, cx, cy + rh / 2 + 18, dimColor);
-        drawDimLabelVertical(ctx, `${w} mm`, cx - rw / 2 - 18, cy, dimColor);
+        drawDimLabel(ctx, `${l} ${activeStencilUnit}`, cx, cy + rh / 2 + 18, dimColor);
+        drawDimLabelVertical(ctx, `${w} ${activeStencilUnit}`, cx - rw / 2 - 18, cy, dimColor);
       }
       break;
     }
@@ -516,11 +568,11 @@ function calculateStencil() {
       perimeter = 2 * (L + W);
       steps = [
         `<span class="step-label">Shape:</span> Rectangle`,
-        `<span class="step-label">Dimensions:</span> L = ${L} mm, W = ${W} mm`,
+        `<span class="step-label">Dimensions:</span> L = ${L} ${activeStencilUnit}, W = ${W} ${activeStencilUnit}`,
         `<span class="step-formula">Area = L × W</span>`,
-        `<span class="step-result">Area = ${L} × ${W} = ${area.toFixed(4)} mm²</span>`,
+        `<span class="step-result">Area = ${L} × ${W} = ${area.toFixed(4)} sq ${activeStencilUnit}</span>`,
         `<span class="step-formula">Perimeter = 2 × (L + W)</span>`,
-        `<span class="step-result">Perimeter = 2 × (${L} + ${W}) = ${perimeter.toFixed(4)} mm</span>`,
+        `<span class="step-result">Perimeter = 2 × (${L} + ${W}) = ${perimeter.toFixed(4)} ${activeStencilUnit}</span>`,
       ];
       break;
     }
@@ -536,11 +588,11 @@ function calculateStencil() {
       perimeter = Math.PI * D;
       steps = [
         `<span class="step-label">Shape:</span> Circle`,
-        `<span class="step-label">Diameter:</span> ${D} mm (Radius = ${r} mm)`,
+        `<span class="step-label">Diameter:</span> ${D} ${activeStencilUnit} (Radius = ${r} ${activeStencilUnit})`,
         `<span class="step-formula">Area = π × r²</span>`,
-        `<span class="step-result">Area = π × ${r}² = ${area.toFixed(4)} mm²</span>`,
+        `<span class="step-result">Area = π × ${r}² = ${area.toFixed(4)} sq ${activeStencilUnit}</span>`,
         `<span class="step-formula">Perimeter = π × D</span>`,
-        `<span class="step-result">Perimeter = π × ${D} = ${perimeter.toFixed(4)} mm</span>`,
+        `<span class="step-result">Perimeter = π × ${D} = ${perimeter.toFixed(4)} ${activeStencilUnit}</span>`,
       ];
       break;
     }
@@ -566,11 +618,11 @@ function calculateStencil() {
 
       steps = [
         `<span class="step-label">Shape:</span> Rounded Rectangle`,
-        `<span class="step-label">Dimensions:</span> L = ${L} mm, W = ${W} mm, r = ${r.toFixed(3)} mm`,
+        `<span class="step-label">Dimensions:</span> L = ${L} ${activeStencilUnit}, W = ${W} ${activeStencilUnit}, r = ${r.toFixed(3)} ${activeStencilUnit}`,
         `<span class="step-formula">Area = L×W − (4−π)×r²</span>`,
-        `<span class="step-result">Area = ${L}×${W} − (4−π)×${r.toFixed(3)}² = ${area.toFixed(4)} mm²</span>`,
+        `<span class="step-result">Area = ${L}×${W} − (4−π)×${r.toFixed(3)}² = ${area.toFixed(4)} sq ${activeStencilUnit}</span>`,
         `<span class="step-formula">Perimeter = 2×(L+W) − 8r + 2πr</span>`,
-        `<span class="step-result">Perimeter = ${perimeter.toFixed(4)} mm</span>`,
+        `<span class="step-result">Perimeter = ${perimeter.toFixed(4)} ${activeStencilUnit}</span>`,
       ];
       break;
     }
@@ -607,9 +659,9 @@ function calculateStencil() {
         `<span class="step-label">Vertices:</span> ${pts.map((p, i) => `P${i + 1}(${p.x}, ${p.y})`).join(", ")}`,
         `<span class="step-formula">Shoelace Formula:  Area = 0.5 × |Σ(xᵢyᵢ₊₁ − xᵢ₊₁yᵢ)|</span>`,
         `<span class="step-result">Shoelace sum = ${shoelaceSum.toFixed(6)}</span>`,
-        `<span class="step-result">Area = 0.5 × |${shoelaceSum.toFixed(6)}| = ${area.toFixed(4)} mm²</span>`,
+        `<span class="step-result">Area = 0.5 × |${shoelaceSum.toFixed(6)}| = ${area.toFixed(4)} sq ${activeStencilUnit}</span>`,
         `<span class="step-formula">Perimeter = Σ edge lengths</span>`,
-        `<span class="step-result">Perimeter = ${perimeter.toFixed(4)} mm</span>`,
+        `<span class="step-result">Perimeter = ${perimeter.toFixed(4)} ${activeStencilUnit}</span>`,
       ];
       break;
     }
@@ -641,9 +693,9 @@ function calculateStencil() {
 
   steps.push(
     "",
-    `<span class="step-label">Stencil Thickness:</span> ${thickness} mm`,
+    `<span class="step-label">Stencil Thickness:</span> ${thickness} ${activeStencilUnit}`,
     `<span class="step-formula">Area Wall = Perimeter × Thickness</span>`,
-    `<span class="step-result">Area Wall = ${perimeter.toFixed(4)} × ${thickness} = ${areaWall.toFixed(4)} mm²</span>`,
+    `<span class="step-result">Area Wall = ${perimeter.toFixed(4)} × ${thickness} = ${areaWall.toFixed(4)} sq ${activeStencilUnit}</span>`,
     `<span class="step-formula">Area Ratio = Area Opening / (Perimeter × Thickness)</span>`,
     `<span class="step-result">Area Ratio = ${area.toFixed(4)} / ${areaWall.toFixed(4)} = ${areaRatio.toFixed(4)}</span>`,
     "",
@@ -686,7 +738,7 @@ document.getElementById("copyStencilResults").addEventListener("click", () => {
   const peri = document.getElementById("resPerimeter").textContent;
   const aw = document.getElementById("resAreaWall").textContent;
   const ar = document.getElementById("resAreaRatio").textContent;
-  const text = `Area Opening: ${ao} mm²\nPerimeter: ${peri} mm\nArea Wall: ${aw} mm²\nArea Ratio: ${ar}`;
+  const text = `Area Opening: ${ao} sq ${activeStencilUnit}\nPerimeter: ${peri} ${activeStencilUnit}\nArea Wall: ${aw} sq ${activeStencilUnit}\nArea Ratio: ${ar}`;
   navigator.clipboard.writeText(text).then(() => showToast("Results copied!", "success"));
 });
 
@@ -740,27 +792,9 @@ const MIL_TO_MM = 0.0254;
 
 let componentIdCounter = 0;
 
-// Safe Toast fallback (prevents code crashes if showToast isn't defined)
-function safeToast(msg, type) {
-  if (typeof showToast === "function") {
-    showToast(msg, type);
-  } else {
-    alert(msg);
-  }
-}
-
-// Safe History fallback
-function safeSaveHistory(data) {
-  if (typeof saveHistory === "function") {
-    saveHistory(data);
-  }
-}
-
 function addComponentEntry() {
   componentIdCounter++;
   const container = document.getElementById("componentEntries");
-  if (!container) return;
-
   const entry = document.createElement("div");
   entry.className = "component-entry";
   entry.id = `comp-${componentIdCounter}`;
@@ -782,24 +816,30 @@ function addComponentEntry() {
   container.appendChild(entry);
 }
 
+// Add initial entry
+addComponentEntry();
+
+document.getElementById("addComponentBtn").addEventListener("click", addComponentEntry);
+
+document.getElementById("calcTHBtn").addEventListener("click", calculateThroughHole);
+
 function calculateThroughHole() {
-  const unitElem = document.getElementById("thUnit");
-  if (!unitElem) return;
+  const unit = document.getElementById("thUnit").value; // "mm" or "mil"
+  const entries = document.querySelectorAll("#componentEntries .component-entry");
 
-  const unit = unitElem.value;
-  const entries = document.querySelectorAll(".component-entry");
-
-  const platingRaw = parseFloat(document.getElementById("thPlating")?.value);
+  // Read optional plating allowance (in mil). Default to 0 if empty.
+  const platingRaw = parseFloat(document.getElementById("thPlating").value);
   const platingMil = (!isNaN(platingRaw) && platingRaw >= 0) ? platingRaw : 0;
 
   if (entries.length === 0) {
-    safeToast("Add at least one component.", "error");
+    showToast("Add at least one component.", "error");
     return;
   }
 
   const results = [];
   const stepsLines = [];
 
+  // Show plating context once at top
   stepsLines.push(
     `<span class="step-label">Plating Allowance:</span> ${platingMil.toFixed(2)} mil per side` +
     (platingMil === 0 ? ' <span style="color:var(--text-muted);">(not specified — Drill = Finished Hole)</span>' : ''),
@@ -807,28 +847,32 @@ function calculateThroughHole() {
   );
 
   entries.forEach((entry, idx) => {
-    const refInput = entry.querySelector('[data-field="ref"]');
-    const pinInput = entry.querySelector('[data-field="pin"]');
-
-    const ref = (refInput && refInput.value.trim()) ? refInput.value.trim() : `Comp${idx + 1}`;
-    const pinRaw = parseFloat(pinInput ? pinInput.value : '');
-
-    // Skip empty or zero/negative pin inputs
+    const ref = entry.querySelector('[data-field="ref"]').value || `Comp${idx + 1}`;
+    const pinRaw = parseFloat(entry.querySelector('[data-field="pin"]').value);
     if (isNaN(pinRaw) || pinRaw <= 0) return;
 
+    // Convert pin diameter to mil for calculations
     const pinMil = unit === "mm" ? pinRaw * MM_TO_MIL : pinRaw;
+
+    // Company Standard:  Finished Hole = Pin Diameter + 8 mil
     const finishedHoleMil = pinMil + 8;
-    const drillMil = finishedHoleMil + (2 * platingMil);
+
+    // Drill Size = Finished Hole + 2 × Plating Allowance
+    // (plating is deposited on both walls, so total reduction = 2 × allowance)
+    const drillMil = finishedHoleMil + 2 * platingMil;
     const roundedDrillMil = Math.ceil(drillMil);
     const recommendedFinishedDrillMil = roundedDrillMil % 2 === 0 ? roundedDrillMil : roundedDrillMil + 1;
     const recommendedPadMil = recommendedFinishedDrillMil + 20;
-    const clearanceMil = finishedHoleMil - pinMil;
 
+    // Hole-to-Pin Clearance = Finished Hole − Pin Diameter
+    const clearanceMil = finishedHoleMil - pinMil; // always 8 mil by definition
+
+    // Build result object with both display units.
     const toMilDisplay = (valMil) => valMil.toFixed(2);
     const toMmDisplay = (valMil) => (valMil * MIL_TO_MM).toFixed(4);
     const toDualDisplay = (valMil) => `${toMmDisplay(valMil)} mm / ${toMilDisplay(valMil)} mil`;
 
-    results.push({
+    const row = {
       ref,
       pin: toDualDisplay(pinMil),
       finishedHole: toDualDisplay(finishedHoleMil),
@@ -837,7 +881,8 @@ function calculateThroughHole() {
       recommendedPad: toDualDisplay(recommendedPadMil),
       clearance: toDualDisplay(clearanceMil),
       unit: "mm / mil",
-    });
+    };
+    results.push(row);
 
     stepsLines.push(
       `<span class="step-label">─── ${ref} ───</span>`,
@@ -846,7 +891,7 @@ function calculateThroughHole() {
       `<span class="step-result">Finished Hole = ${pinMil.toFixed(2)} + 8 = ${finishedHoleMil.toFixed(2)} mil → ${toDualDisplay(finishedHoleMil)}</span>`,
       `<span class="step-formula">Drill Size = Finished Hole + 2 × Plating Allowance</span>`,
       `<span class="step-result">Drill = ${finishedHoleMil.toFixed(2)} + 2 × ${platingMil.toFixed(2)} = ${drillMil.toFixed(2)} mil → ${toDualDisplay(drillMil)}</span>`,
-      `<span class="step-formula">Recommended Finished Drill Size = Calculated Drill Size rounded up to next even mil</span>`,
+      `<span class="step-formula">Recommended Finished Drill Size = Calculated Drill Size rounded up to the next even mil size</span>`,
       `<span class="step-result">Recommended Finished Drill = ${drillMil.toFixed(2)} mil → ${recommendedFinishedDrillMil.toFixed(2)} mil → ${toDualDisplay(recommendedFinishedDrillMil)}</span>`,
       `<span class="step-formula">Recommended Pad Size = Recommended Finished Drill Size + 20 mil</span>`,
       `<span class="step-result">Recommended Pad = ${recommendedFinishedDrillMil.toFixed(2)} + 20 = ${recommendedPadMil.toFixed(2)} mil → ${toDualDisplay(recommendedPadMil)}</span>`,
@@ -857,66 +902,48 @@ function calculateThroughHole() {
   });
 
   if (results.length === 0) {
-    safeToast("Please enter a valid Pin Diameter (greater than 0).", "error");
+    showToast("Please enter valid pin diameters.", "error");
     return;
   }
 
-  // Render Table
+  // Render table
   const tbody = document.getElementById("thResultBody");
-  if (tbody) {
-    tbody.innerHTML = results
-      .map(
-        (r) => `
-      <tr>
-        <td>${r.ref}</td>
-        <td>${r.pin}</td>
-        <td>${r.drill}</td>
-        <td>${r.recommendedFinishedDrill}</td>
-        <td>${r.recommendedPad}</td>
-        <td>${r.clearance}</td>
-        <td>${r.unit}</td>
-      </tr>`
-      )
-      .join("");
-  }
+  tbody.innerHTML = results
+    .map(
+      (r) => `
+    <tr>
+      <td>${r.ref}</td>
+      <td>${r.pin}</td>
+      <td>${r.drill}</td>
+      <td>${r.recommendedFinishedDrill}</td>
+      <td>${r.recommendedPad}</td>
+      <td>${r.clearance}</td>
+      <td>${r.unit}</td>
+    </tr>`
+    )
+    .join("");
 
-  // Render Calculation Steps
-  const stepsElem = document.getElementById("thCalcSteps");
-  if (stepsElem) {
-    stepsElem.innerHTML = stepsLines.join("<br/>");
-  }
+  // Render steps
+  document.getElementById("thCalcSteps").innerHTML = stepsLines.join("<br/>");
 
-  safeSaveHistory({
+  // Save to history
+  saveHistory({
     type: "Through-Hole",
     data: results,
   });
 
-  safeToast(`Calculated ${results.length} component(s)!`, "success");
+  showToast(`Calculated ${results.length} component(s)!`, "success");
 }
 
-// Bind event listeners only after DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-  // Add first row on load
-  addComponentEntry();
-
-  const addBtn = document.getElementById("addComponentBtn");
-  if (addBtn) addBtn.addEventListener("click", addComponentEntry);
-
-  const calcBtn = document.getElementById("calcTHBtn");
-  if (calcBtn) calcBtn.addEventListener("click", calculateThroughHole);
-
-  const copyBtn = document.getElementById("copyTHResults");
-  if (copyBtn) {
-    copyBtn.addEventListener("click", () => {
-      const rows = document.querySelectorAll("#thResultBody tr");
-      let text = "Ref\tLead Diameter\tCalculated Drill Size\tRecommended Finished Drill Size\tRecommended Pad Size\tHole-to-Pin Clearance\tUnit\n";
-      rows.forEach((tr) => {
-        const cells = Array.from(tr.cells).map((c) => c.textContent.trim());
-        text += cells.join("\t") + "\n";
-      });
-      navigator.clipboard.writeText(text).then(() => safeToast("Table copied!", "success"));
-    });
-  }
+// Copy through-hole results
+document.getElementById("copyTHResults").addEventListener("click", () => {
+  const rows = document.querySelectorAll("#thResultBody tr");
+  let text = "Ref\tLead Diameter\tCalculated Drill Size\tRecommended Finished Drill Size\tRecommended Pad Size\tHole-to-Pin Clearance\tUnit\n";
+  rows.forEach((tr) => {
+    const cells = Array.from(tr.cells).map((c) => c.textContent.trim());
+    text += cells.join("\t") + "\n";
+  });
+  navigator.clipboard.writeText(text).then(() => showToast("Table copied!", "success"));
 });
 
 
@@ -1419,6 +1446,9 @@ document.getElementById("exportPDFBtn").addEventListener("click", () => {
     } else if (h.type === "Unit Conversion") {
       const d = h.data;
       lines.push(`  ${d.conversion}: ${d.from} -> ${d.to}`);
+    } else if (h.type === "BGA Land Pattern") {
+      const d = h.data;
+      lines.push(`  Package: ${d.pkgName || "BGA"} | Pitch: ${d.pitch} | Ball: ${d.ballDia} -> Land: ${d.landDia} (${d.density})`);
     }
     lines.push("-".repeat(60));
   });
@@ -1485,6 +1515,7 @@ function refreshDashboard() {
       if (h.type === "Stencil Aperture") summary = `${h.data.shape} — Ratio: ${h.data.areaRatio}`;
       else if (h.type === "Through-Hole" && Array.isArray(h.data)) summary = `${h.data.length} component(s)`;
       else if (h.type === "Unit Conversion") summary = h.data.conversion;
+      else if (h.type === "BGA Land Pattern") summary = `${h.data.pkgName || "BGA"}: Ball ${h.data.ballDia} -> Land ${h.data.landDia} (${h.data.density})`;
       return `<div class="history-entry">
         <div class="history-meta">
           <span class="history-type">${h.type}</span>
